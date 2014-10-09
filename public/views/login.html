@@ -1,25 +1,18 @@
 <!doctype html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-	itemscope="itemscope" itemtype="http://schema.org/Product">
-{% include 'includes/head.html' %}
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" itemscope="itemscope" itemtype="http://schema.org/Product">
+
+    {% include 'includes/head.html' %}
 
 <body>
-                  
+    <header class="navbar navbar-inverse navbar-static-top" data-role="navigation">
+        <div class="container" data-ng-include="'modules/home/views/header.html'"></div>
+
+    </header>
+
 	<div data-ng-controller="signInController">
 
- 		<div id="indexId" ng-show="indexId">    
-    		<div>
-    			 <header class="navbar navbar-inverse navbar-static-top" data-role="navigation">
-        			<div class="container" data-ng-include="'modules/home/views/header.html'"></div>
-    			 </header>
-    			 <div class="container-fluid">
-            		<div data-ui-view></div>
-    		 	</div>
-    		</div>
-	  	</div>
- 	 
         <div id="loginbox" ng-show="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-        
+
             <div class="panel panel-info" >
                     <div class="panel-heading">
                         <div class="panel-title">Sign In</div>
@@ -35,13 +28,13 @@
                                     
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                        <input id="login-username" type="text" class="form-control" name="username" value="" ng-model="credentials.email" placeholder="username or email" required="" autofocus="">
+                                        <input id="login-username" type="text" class="form-control" name="username" value="" ng-model="credentials.email" placeholder="user" required="" autofocus="">
                                         
                             </div>
                                 
                             <div style="margin-bottom: 25px" class="input-group">
                                         <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                        <input id="login-password" type="password" class="form-control" name="password" ng-model="credentials.password" placeholder="password" required="">
+                                        <input id="login-password" type="password" class="form-control" name="password" ng-model="credentials.password" placeholder="mot de passe" required="">
                                     </div>
                                     
 
@@ -60,9 +53,6 @@
 
                                     <div class="col-sm-12 controls">
                                     <button type="submit" class="btn btn-success">Login</button>
-                                    	<!-- <a id="btn-login" href="#" class="btn btn-success">Login  </a> -->
-										<!-- <a id="btn-fblogin" href="#" class="btn btn-primary">Login with Facebook</a> -->
-
                                     </div>
                                 </div>
 
@@ -83,124 +73,85 @@
 
                         </div>                     
                     </div>  
-                 </div> 
-        </div>
+            </div>
+    </div>
         
         <div id="signupbox" style="display:none; margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
         
-        <div data-ng-controller="signUpController">
-                    <div class="panel panel-info">
-                        <div class="panel-heading">
-                            <div class="panel-title">Sign Up</div>
-                            
-                            <div style="float:right; font-size: 85%; position: relative; top:-10px">Already have an account ? <a id="signinlink" href="#" onclick="$('#signupbox').hide(); $('#loginbox').show()">Sign In here</a></div>
-                        </div>  
-                        <div class="panel-body" >
-                            <form id="signupformId" name="signupform" class="form-horizontal" role="form" ng-submit=signup(userInfo)>
-                                
-                                <div id="signupalert" class="alert alert-success" ng-show="signupalert">
-                                    <p> User Information Saved Successfully ...!! </p>
-                                    <span></span>
-                                </div>
-                                
-                                <div id="signupalert" class="alert alert-danger" ng-show="mailCheckAlert">
-                                    <p> Username already exists. Please log in or enter another username ! </p>
-                                    <span></span>
-                                </div>
-                                  
-                                <div class="form-group">
-                                    <label for="email" class="col-md-3 control-label">Email</label>
-                                    <div class="col-md-9">
-                                        <input type="email" class="form-control" ng-model="userInfo.email" name="email" placeholder="Email Address" required="">
-                                    </div>
-                                </div>
-                                    
-                                <div class="form-group">
-                                    <label for="firstname" class="col-md-3 control-label">First Name</label>
-                                    <div class="col-md-9">
-                                        <input type="text" class="form-control" name="firstname" ng-model="userInfo.firstName" placeholder="First Name" required="">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="lastname" class="col-md-3 control-label">Last Name</label>
-                                    <div class="col-md-9">
-                                        <input type="text" class="form-control" name="lastname" ng-model="userInfo.lastName" placeholder="Last Name">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="password" class="col-md-3 control-label">Password</label>
-                                    <div class="col-md-9">
-                                        <input type="password" class="form-control" name="passwd" ng-model="userInfo.password" placeholder="Password" id="inputPassword" required="">
-                                        <!-- <input type="hidden" class="form-control" name="role" ng-model="userInfo.role" value="Guest"> -->
-                                    </div>
-                                </div>
-                                    
-                                <div class="form-group">
-                                    <!-- Button -->                                        
-                                    <div class="col-md-offset-3 col-md-9">
-                                    <button type="submit" class="btn btn-success">&nbsp Sign Up</button>
-                                        <!-- <button id="btn-signup" type="button" class="btn btn-info"><i class="icon-hand-right"></i> &nbsp Sign Up</button> -->
-                                        <span style="margin-left:8px;"></span>  
-                                    </div>
-                                </div>
-                                
-                                <div style="border-top: 1px solid #999; padding-top:20px"  class="form-group">
-                                    
-                                    <div class="col-md-offset-3 col-md-9">
-                                        <!-- <button id="btn-fbsignup" type="button" class="btn btn-primary"><i class="icon-facebook"></i>   Sign Up with Facebook</button> -->
-                                    </div>                                           
-                                        
-                                </div>
-                                
-                                
-                                
-                            </form>
-                         </div>
-                    </div>
+            <div data-ng-controller="signUpController">
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <div class="panel-title">Sign Up</div>
 
-			</div>
+                                <div style="float:right; font-size: 85%; position: relative; top:-10px">Already have an account ? <a id="signinlink" href="#" onclick="$('#signupbox').hide(); $('#loginbox').show()">Sign In here</a></div>
+                            </div>
+                            <div class="panel-body" >
+                                <form id="signupformId" name="signupform" class="form-horizontal" role="form" ng-submit=signup(userInfo)>
+
+                                    <div id="signupalert" class="alert alert-success" ng-show="signupalert">
+                                        <p> User Information Saved Successfully ...!! </p>
+                                        <span></span>
+                                    </div>
+
+                                    <div id="signupalert1" class="alert alert-danger" ng-show="mailCheckAlert">
+                                        <p> Username already exists. Please log in or enter another username ! </p>
+                                        <span></span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="email" class="col-md-3 control-label">Email</label>
+                                        <div class="col-md-9">
+                                            <input type="email" class="form-control" ng-model="userInfo.email" name="email" placeholder="Email Address" required="">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="firstname" class="col-md-3 control-label">First Name</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="firstname" ng-model="userInfo.firstName" placeholder="First Name" required="">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="lastname" class="col-md-3 control-label">Last Name</label>
+                                        <div class="col-md-9">
+                                            <input type="text" class="form-control" name="lastname" ng-model="userInfo.lastName" placeholder="Last Name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password" class="col-md-3 control-label">Password</label>
+                                        <div class="col-md-9">
+                                            <input type="password" class="form-control" name="passwd" ng-model="userInfo.password" placeholder="Password" id="inputPassword" required="">
+                                            <!-- <input type="hidden" class="form-control" name="role" ng-model="userInfo.role" value="Guest"> -->
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <!-- Button -->
+                                        <div class="col-md-offset-3 col-md-9">
+                                        <button type="submit" class="btn btn-success">&nbsp Sign Up</button>
+                                            <!-- <button id="btn-signup" type="button" class="btn btn-info"><i class="icon-hand-right"></i> &nbsp Sign Up</button> -->
+                                            <span style="margin-left:8px;"></span>
+                                        </div>
+                                    </div>
+
+                                    <div style="border-top: 1px solid #999; padding-top:20px"  class="form-group">
+
+                                        <div class="col-md-offset-3 col-md-9">
+                                            <!-- <button id="btn-fbsignup" type="button" class="btn btn-primary"><i class="icon-facebook"></i>   Sign Up with Facebook</button> -->
+                                        </div>
+
+                                    </div>
+
+
+
+                                </form>
+                             </div>
+                        </div>
+
+            </div>
                
-               
-                
-         </div> 
-
-
-	<!-- <div class="container">
-
-		<form class="form-signin" role="form">
-			<h2 class="form-signin-heading">Please sign in</h2>
-			<input type="email" class="form-control" placeholder="Email address"
-				required="" autofocus="">
-			<input type="password" class="form-control" placeholder="Password" required="">
-
-			<input type="password" class="form-control pwd" required="">
-			<span class="input-group-btn">
-				<button class="btn btn-default reveal" type="button">
-					<i class="glyphicon glyphicon-eye-open"></i>
-				</button>
-			</span> <label class="checkbox"> <input type="checkbox"
-				value="remember-me"> Remember me
-			</label>
-			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign
-				in</button>
-		</form>
-
-	</div> -->
-	
+        </div>
 	{% include 'includes/foot.html' %}
 
 </body>
-
-<!-- to see password -->
-
-<!-- <script>
-	$(".reveal").mousedown(function() {
-		$(".pwd").replaceWith($('.pwd').clone().attr('type', 'text'));
-	}).mouseup(function() {
-		$(".pwd").replaceWith($('.pwd').clone().attr('type', 'password'));
-	}).mouseout(function() {
-		$(".pwd").replaceWith($('.pwd').clone().attr('type', 'password'));
-	});
-</script>
- -->
 </html>

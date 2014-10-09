@@ -17,25 +17,23 @@ var connectionConfig = {
 /*
  * * SqlConnection
  */
-var SqlConnection = function(sqlQuery, callback) {
 
-	console.log('query is : '+sqlQuery);
+exports.SqlConnection = function(sqlQuery, callback) {
 	console.log('inside SqlConnection function');
 	mssql.connect(connectionConfig, function(err_connect) {
 	    // ... error checks
-
 	    // Query
-		console.log('inside connect' +err_connect);
+		console.log('inside connect, error is : ' +err_connect);
 
 	    var request = new mssql.Request();
 	    request.query(sqlQuery, function(err_query, recordset) {
 	        // ... error checks
-	    	console.log('result data , err_query is : '+err_query);
-	    	console.log('result data , recordset is : '+recordset);
-	        return recordset;
+	    	console.log('err_query is : '+err_query);
+	    	console.log('result data is : '+recordset);
+            console.dir(recordset);
+
+            callback(recordset);
 	    });
 
 	});
 }
-
-exports.SqlConnection = SqlConnection;

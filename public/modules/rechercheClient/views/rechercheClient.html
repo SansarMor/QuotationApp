@@ -1,0 +1,29 @@
+<div data-ng-controller="rechercheClientController">
+       <div class="table-responsive">
+            <div class="row"></div>
+            <table class="table table-hover">
+                <thead style="background-color: #080808; color: #f8f8f8;">
+                <tr>
+                    <th>ID Client</th>
+                    <th>Nom client</th>
+                    <th>Nom site</th>
+                    <th>adresse</th>
+                    <th>Code Postal</th>
+                    <th>ville</th>
+                    <th>SIRFT</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="customer in clientList">
+                    <td>{{customer.IDClient}}</td>
+                    <td>{{customer.NomClient}}</td>
+                    <td>{{customer.NomSite}}</td>
+                    <td>{{customer.Adresse}}</td>
+                    <td>{{customer.CodePostal}}</td>
+                    <td>{{customer.Ville}}</td>
+                    <td>{{customer.SIRFT}}</td>
+                </tr>
+                </tbody>
+            </table>
+       </div>
+</div>
