@@ -9,12 +9,24 @@ angular.module('QuotationApp').config(['$stateProvider', '$urlRouterProvider',
       $urlRouterProvider.otherwise('/');
 
       // states for my app
-      $stateProvider.state('HOME', {
-          url: '/home',
-          templateUrl: 'modules/home/views/home.html'
+      $stateProvider.state('tableauDeBord', {
+          url: '/TableauDeBord',
+          templateUrl: 'modules/tableauDeBord/views/tableauDeBord.html'
       }).state('rechercheClient',{
           url: '/RechercheClient',
           templateUrl: 'modules/rechercheClient/views/rechercheClient.html'
+      }).state('mesdevis',{
+          url: '/Mesdevis',
+          templateUrl: 'modules/mesdevis/views/mesdevis.html'
+      }).state('delegation',{
+          url: '/Delegation',
+          templateUrl: 'modules/delegation/views/delegation.html'
+      }).state('mesApprobations',{
+          url: '/MesApprobations',
+          templateUrl: 'modules/mesApprobations/views/mesApprobations.html'
+      }).state('clientDetails', {
+          url: '/clientDetails',
+          templateUrl: 'modules/client/views/client.html'
       }).state('index',{
           url: '/index',
           templateUrl: 'views/index.html'

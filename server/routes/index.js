@@ -11,7 +11,7 @@ module.exports = function(app){
         // Home route
     app.get('/', function(req, res) {
         /*res.render('index', config.app);*/
-    	res.render('index', config.app);
+    	res.render('login', config.app);
     });
 
     app.get('/crud/users',user.create);

@@ -1,6 +1,10 @@
 <div data-ng-controller="rechercheClientController">
-       <div class="table-responsive">
-            <div class="row"></div>
+
+    <div class="btn-group" style="margin-top: 1em; margin-bottom: 1em">
+        <button type="button" class="btn btn-default glyphicon glyphicon-plus-sign"> AjouterClient</button>
+    </div>
+    <div class="table-responsive">
+
             <table class="table table-hover">
                 <thead style="background-color: #080808; color: #f8f8f8;">
                 <tr>
@@ -11,19 +15,21 @@
                     <th>Code Postal</th>
                     <th>ville</th>
                     <th>SIRFT</th>
+                    <th></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr data-ng-repeat="customer in clientList">
-                    <td>{{customer.IDClient}}</td>
-                    <td>{{customer.NomClient}}</td>
-                    <td>{{customer.NomSite}}</td>
-                    <td>{{customer.Adresse}}</td>
-                    <td>{{customer.CodePostal}}</td>
-                    <td>{{customer.Ville}}</td>
-                    <td>{{customer.SIRFT}}</td>
+                <tr data-ng-repeat="client in clientList">
+                    <td>{{client.IDClient}}</td>
+                    <td>{{client.NomClient}}</td>
+                    <td>{{client.NomSite}}</td>
+                    <td>{{client.Adresse}}</td>
+                    <td>{{client.CodePostal}}</td>
+                    <td>{{client.Ville}}</td>
+                    <td>{{client.SIRFT}}</td>
+                    <td><a class="glyphicon glyphicon-zoom-in" data-ng-click="clientDetails(client)" data-ui-sref="clientDetails" title="More Details"></a></td>
                 </tr>
                 </tbody>
             </table>
-       </div>
+    </div>
 </div>

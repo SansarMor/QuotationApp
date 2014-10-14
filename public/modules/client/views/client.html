@@ -1,0 +1,34 @@
+<!--<script type="application/javascript">
+    $('.nav .nav-tabs li a').click(function(){
+        alert("well done");
+    });
+
+</script>-->
+<div data-ng-controller="ClientController">
+
+    <div class="row">
+        <div style="margin-left: 2em">
+            {{clientDetails.NomClient}}
+        </div>
+    </div>
+    <div class="row">
+        <div style="margin-left: 2em">
+            {{clientDetails.Adresse}}, {{clientDetails.CodePostal}} {{clientDetails.Ville}}
+        </div>
+    </div>
+
+    <div class="row" style="background-color: transparent">
+        <div class="span12">
+            <ul class="nav nav-tabs">
+                <li data-ng-repeat="userMenu in userMenus" data-ui-sref-active="active">
+                    <a onclick="setAsHeader()" ng-click="showClientSection(userMenu)">{{userMenu.title}}</a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+    <p ng-include="clientBodyURL"></p>
+
+
+</div>
