@@ -8,12 +8,12 @@
 
     <div class="row">
         <div style="margin-left: 2em">
-            {{clientDetails.NomClient}}
+            {{clientDetails.corporate_name}}
         </div>
     </div>
     <div class="row">
         <div style="margin-left: 2em">
-            {{clientDetails.Adresse}}, {{clientDetails.CodePostal}} {{clientDetails.Ville}}
+            {{clientDetails.corporate_name_add}}, {{clientDetails.zip_code}} {{clientDetails.city}}
         </div>
     </div>
 
@@ -21,7 +21,7 @@
         <div class="span12">
             <ul class="nav nav-tabs">
                 <li data-ng-repeat="userMenu in userMenus" data-ui-sref-active="active">
-                    <a onclick="setAsHeader()" ng-click="showClientSection(userMenu)">{{userMenu.title}}</a>
+                    <a onclick="myfunction()" ng-click="showClientSection(userMenu)">{{userMenu.title}}</a>
                 </li>
             </ul>
         </div>

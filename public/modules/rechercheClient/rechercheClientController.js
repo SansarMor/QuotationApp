@@ -3,6 +3,8 @@
 angular.module('QuotationApp.masters').controller('rechercheClientController', ['$rootScope','$scope','$http','rechercheClientService', function($rootScope, $scope, $http, rechercheClientService){
 
     $http.get('crud/clients').success(function(data){
+        console.log('customer data is : ');
+        console.dir(data);
         $scope.clientList=[];
         $scope.clientList=data;
     });

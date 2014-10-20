@@ -1,9 +1,9 @@
 <div data-ng-controller="rechercheClientController">
 
-    <div class="btn-group" style="margin-top: 1em; margin-bottom: 1em">
+    <div class="btn-group" style="margin-top: 1em; margin-bottom: 1em; margin-left: 1em">
         <button type="button" class="btn btn-default glyphicon glyphicon-plus-sign"> AjouterClient</button>
     </div>
-    <div class="table-responsive">
+    <div class="table-responsive table-border">
 
             <table class="table table-hover">
                 <thead style="background-color: #080808; color: #f8f8f8;">
@@ -14,19 +14,19 @@
                     <th>adresse</th>
                     <th>Code Postal</th>
                     <th>ville</th>
-                    <th>SIRFT</th>
+                    <th>SIRET</th>
                     <th></th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr data-ng-repeat="client in clientList">
-                    <td>{{client.IDClient}}</td>
-                    <td>{{client.NomClient}}</td>
+                    <td>{{client.AN8}}</td>
+                    <td>{{client.corporate_name}}</td>
                     <td>{{client.NomSite}}</td>
-                    <td>{{client.Adresse}}</td>
-                    <td>{{client.CodePostal}}</td>
-                    <td>{{client.Ville}}</td>
-                    <td>{{client.SIRFT}}</td>
+                    <td>{{client.address_1}}</td>
+                    <td>{{client.zip_code}}</td>
+                    <td>{{client.city}}</td>
+                    <td>{{client.SIRET}}</td>
                     <td><a class="glyphicon glyphicon-zoom-in" data-ng-click="clientDetails(client)" data-ui-sref="clientDetails" title="More Details"></a></td>
                 </tr>
                 </tbody>

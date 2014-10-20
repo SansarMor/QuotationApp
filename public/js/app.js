@@ -5,6 +5,7 @@ angular.module('QuotationApp', ['ngCookies', 'ngResource', 'ui.bootstrap', 'ui.r
 angular.module('QuotationApp.system', []);
 angular.module('QuotationApp.dash', []);
 angular.module('QuotationApp.masters', []);
+/*angular.module('QuotationApp.masters.client',[]);*/
 
 angular.module('QuotationApp').factory('lodash', ['$window',
     function($window) {

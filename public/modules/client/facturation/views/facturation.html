@@ -1,54 +1,85 @@
-<div data-ng-controller="ClientInfoPController">
-
+<div data-ng-controller="clientFacturationController">
     <div class="row margin-top-left-1">
 
         <div class="col-md-5">
             <div class="row border-bottom-row">
                 <div class="col-md-6">
-                    Code Client
+                    Conditions de paiement
                 </div>
                 <div class="col-md-6">
-                    {{clientDetails.AN8}}
-                </div>
-            </div>
-            <div class="row border-bottom-row margin-top-1">
-                <div class="col-md-6">
-                    SIRET
-                </div>
-                <div class="col-md-6">
-                    {{clientDetails.SIRET}}
+                    none
                 </div>
             </div>
             <div class="row border-bottom-row margin-top-1">
                 <div class="col-md-6">
-                    Code APE
+                    Mode de reglement
                 </div>
                 <div class="col-md-6">
-                    {{clientDetails.APE_code}}
-                </div>
-            </div>
-            <div class="row border-bottom-row margin-top-1">
-                <div class="col-md-6">
-                    Raison sociale
-                </div>
-                <div class="col-md-6">
-                    sample client s.r.l
+                    none
                 </div>
             </div>
             <div class="row border-bottom-row margin-top-1">
                 <div class="col-md-6">
-                    Nom de recherche
+                    N de contrat tarifaire
                 </div>
                 <div class="col-md-6">
-                    sample client nom connu
+                    N de contrat tarifaire
                 </div>
             </div>
             <div class="row border-bottom-row margin-top-1">
                 <div class="col-md-6">
-                    Famile Marketing
+                    Bon de commande obligatoire
                 </div>
                 <div class="col-md-6">
-                    TEST
+                    none
+                </div>
+            </div>
+            <div class="row border-bottom-row margin-top-1">
+                <div class="col-md-6">
+                    Nombre exemplaire facture
+                </div>
+                <div class="col-md-6">
+                    none
+                </div>
+            </div>
+            <div class="row border-bottom-row margin-top-1">
+                <div class="col-md-6">
+                    Type de facture
+                </div>
+                <div class="col-md-6">
+                    none
+                </div>
+            </div>
+            <div class="row border-bottom-row margin-top-1">
+                <div class="col-md-6">
+                    Frequence facturation
+                </div>
+                <div class="col-md-6">
+                    none
+                </div>
+            </div>
+            <div class="row border-bottom-row margin-top-1">
+                <div class="col-md-6">
+                    Famille TVA Client
+                </div>
+                <div class="col-md-6">
+                    none
+                </div>
+            </div>
+            <div class="row border-bottom-row margin-top-1">
+                <div class="col-md-6">
+                    Retenue de garantie
+                </div>
+                <div class="col-md-6">
+                    Retenue de garantie
+                </div>
+            </div>
+            <div class="row margin-top-1">
+                <div class="col-md-6">
+                    Commentaires internes :
+                </div>
+                <div class="col-md-6">
+                    <textarea class="form-control" rows="2"></textarea>
                 </div>
             </div>
         </div>
@@ -56,61 +87,44 @@
         <div class="col-md-5 col-lg-offset-1">
             <div class="row border-bottom-row">
                 <div class="col-md-6">
-                    Compl. de raison sociale
+                    Hierarchie Client
                 </div>
                 <div class="col-md-6">
-                    {{clientDetails.corporate_name_add}}
-                </div>
-            </div>
-            <div class="row border-bottom-row margin-top-1">
-                <div class="col-md-6">
-                    Adresse 1
-                </div>
-                <div class="col-md-6">
-                    {{clientDetails.address_1}}
+                    Hierarchie Client
                 </div>
             </div>
             <div class="row border-bottom-row margin-top-1">
                 <div class="col-md-6">
-                    Adresse 2
+                    Facturation
                 </div>
                 <div class="col-md-6">
-                    {{clientDetails.address_2}}
-                </div>
-            </div>
-            <div class="row border-bottom-row margin-top-1">
-                <div class="col-md-6">
-                    Adresse 3
-                </div>
-                <div class="col-md-6">
-                    {{clientDetails.address_3}}
+                    none
                 </div>
             </div>
             <div class="row border-bottom-row margin-top-1">
                 <div class="col-md-6">
-                    Code postal
+                    Routage facture (clients/ADV)
                 </div>
                 <div class="col-md-6">
-                    {{clientDetails.zip_code}}
-                </div>
-            </div>
-            <div class="row border-bottom-row margin-top-1">
-                <div class="col-md-6">
-                    Ville
-                </div>
-                <div class="col-md-6">
-                    {{clientDetails.city}}
+                    Routage facture (clients/ADV)
                 </div>
             </div>
             <div class="row border-bottom-row margin-top-1">
                 <div class="col-md-6">
-                    Pays
+                    Routage du bon de visite
                 </div>
                 <div class="col-md-6">
-                    {{clientDetails.country}}
+                    Routage du bon de visite
+                </div>
+            </div>
+            <div class="row border-bottom-row margin-top-1">
+                <div class="col-md-6">
+                    Montant couverture client (EUR)
+                </div>
+                <div class="col-md-6">
+                    Montant couverture client (EUR)
                 </div>
             </div>
         </div>
     </div>
-
 </div>

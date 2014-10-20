@@ -1,0 +1,81 @@
+<div data-ng-controller="clientContactsController">
+    <div ng-show="contactListDiv">
+
+        <div class="btn-group" style="margin-top: 1em; margin-bottom: 1em; margin-left: 1em">
+            <button type="button" class="btn btn-default glyphicon glyphicon-plus-sign" data-ng-click="addContact()"> Ajouter contact</button>
+        </div>
+
+        <div class="table-responsive table-border">
+
+            <table class="table table-hover">
+                <thead style="background-color: #080808; color: #f8f8f8;">
+                <tr>
+                    <th>Nom du client</th>
+                    <th>Client/Site</th>
+                    <th>Fonction</th>
+                    <th>Tel. fixe</th>
+                    <th>Tel. portable</th>
+                    <th>Adresse E-mail</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="client in clientList" data-ng-mouseenter="contact.showDelete = true" data-ng-mouseleave="contact.showDelete = false">
+                    <td>12</td>
+                    <td>abc</td>
+                    <td>sdfsf</td>
+                    <td>sdfsf</td>
+                    <td>fsdfsd</td>
+                    <td>dsfdsf</td>
+                    <td><button data-ng-class="{invisible:!contact.showDelete}" type="button" class="invisible btn btn-link btn-xs" data-ng-click="delete(contact)"><span class="glyphicon glyphicon-trash"></span></button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div ng-show="addContactDiv">
+        <div class="btn-group" style=" margin-top:1em; margin-bottom: 1em; margin-left: 1em">
+            <h3>Ajouter Contact</h3>
+        </div>
+
+        <form role="form" id="contactFormId" name="contactForm" ng-submit="registerContact()">
+            <div class="row margin-top-left-1">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="nomEtPrenomDuContact">Nom et prenom du contact *</label>
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                    <div class="form-group">
+                        <label for="fonction">Fonction *</label>
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                    <div class="form-group">
+                        <label for="assignera">Assignera *</label>
+                        <input type="text" class="form-control" id="" placeholder="">
+                    </div>
+
+                </div>
+                <div class="col-md-4 col-lg-offset-1">
+                    <div class="form-group">
+                        <label for="telFixe">Tel. fixe *</label>
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                    <div class="form-group">
+                        <label for="telPortable">Tel. portable</label>
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                    <div class="form-group">
+                        <label for="fax">Fax</label>
+                        <input type="text" class="form-control"  placeholder="">
+                    </div>
+                    <div class="form-group">
+                        <label for="eMail">E-mail</label>
+                        <input type="text" class="form-control" placeholder="">
+                    </div>
+                    <button class="btn btn-default" ng-click="cancel()">annuler</button>
+                    <button type="submit" class="btn btn-default">enregister</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

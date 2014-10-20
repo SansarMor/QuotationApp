@@ -177,21 +177,17 @@
     </div>
     <script>
 
-       /* $(window).load(function() {
+        $(window).load(function() {
             //setTimeout(myfunction, 3000);
-            *//*setInterval(myfunction, 2000);*//*
+            /*setInterval(myfunction, 2000);*/
             myfunction();
         });
 
-    */ $('.nav-tabs li a').click(function(){
-           $(this).parent().addClass('active').siblings().removeClass('active');
-       });
-
-        function setAsHeader() {
-            $('.nav-tabs li a').click(function(){
-                $(this).parent().addClass('headerBackground').siblings().removeClass('headerBackground');
-            });
-        }
+        function myfunction(){
+             $('.nav-tabs li a').click(function(){
+                   $(this).parent().addClass('active').siblings().removeClass('active');
+             });
+        };
 
     </script>
 </body>
