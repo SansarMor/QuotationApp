@@ -74,12 +74,38 @@ angular.module('QuotationApp.masters').controller('clientSitesController',['$sco
         ];
     };
 
-    $scope.cancel=function(){
+    $scope.cancelSaveSiteSection=function(){
         $scope.clientSitesList=true;
         $scope.addSiteButton=true;
         $scope.sitesListButton=false;
         $scope.addSiteSaveButton=false;
         $scope.addSite=false;
+    };
+
+    $scope.cancelSubSiteSection=function(){
+        $scope.addSubSite=false;
+    };
+
+    $scope.addSubSite1=function(siteId){
+        console.log('selected siteId is :'+siteId);
+        $scope.subSiteParameters = {
+            Site_Id : siteId,
+            MLNM : ''
+        };
+
+        $scope.addSubSite=true;
+    };
+
+    $scope.saveClientSubSite=function(subSiteParameters){
+      console.log('sub site parameters are : ');
+      console.dir(subSiteParameters);
+      $http.post('crud/client/site/subSite/', subSiteParameters).then(function () {
+            /*$scope.signupalert=true;*/
+            console.log('inside save sub site method after saving data');
+            $scope.addSubSite=false;
+            /*Session.create(res.id, res.userid, res.role);*/
+        });
+
     };
 
     $scope.showClientSiteSection=function(clientSiteInfo){

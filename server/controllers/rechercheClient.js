@@ -31,4 +31,19 @@ exports.clientContacts= function(req, res){
         var sqlQuery1='select * from media where ';
         res.jsonp(data);
     });
+};
+
+exports.saveSubSite=function(req, res){
+
+    console.log('site id is : '+req.body.Site_Id);
+    console.log('sub site name is : '+req.body.MLNM);
+
+    var mlnmValue=req.body.MLNM;
+
+    var sqlQuery='INSERT INTO sub_site (Site_Id, MLNM) VALUES ('+req.body.Site_Id+' , 12345)';
+
+    new mssql.SqlConnection(sqlQuery, function(data){
+        console.log('inside sub site query success function : ');
+        res.jsonp();
+    });
 }

@@ -1,11 +1,43 @@
 <div data-ng-controller="rechercheClientController">
 
-    <div class="btn-group" style="margin-top: 1em; margin-bottom: 1em; margin-left: 1em">
-        <button type="button" class="btn btn-default glyphicon glyphicon-plus-sign"> AjouterClient</button>
+    <div class="row" style="margin-top: 1em;margin-left: 1em">
+        <div class="col-md-6">
+            <form class="form-inline">
+                <div class="dataTables_length" id="example_length">
+                    <label style="display: inline-block">
+                        Show
+                        <select name="example_length" aria-controls="example" class="form-control input-sm">
+                            <option value="10">10</option>
+                            <option value="25">25</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
+                        </select>
+                        entries
+                    </label>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <form class="form-inline">
+                <div id="example_filter" class="dataTables_filter">
+                    <label style="display: inline-block;margin-right: 1em">
+                        Search: <input id="searchInput" type="search" class="form-control input-sm" placeholder="search" aria-controls="example">
+                    </label>
+                </div>
+            </form>
+        </div>
+        <!--<div class="input-append col-md-10">
+            <input type="text" class="search-query mac-style" placeholder="Search">
+        </div>-->
     </div>
+
+    <!--<div class="btn-group" style="margin-top: 1em; margin-bottom: 1em; margin-left: 1em">
+        <button type="button" class="btn btn-default glyphicon glyphicon-plus-sign"> AjouterClient</button>
+    </div>-->
+
     <div class="table-responsive table-border">
 
-            <table class="table table-hover">
+            <table class="table table-hover table-striped" id="example" role="grid" data-search="true">
                 <thead style="background-color: #080808; color: #f8f8f8;">
                 <tr>
                     <th>ID Client</th>

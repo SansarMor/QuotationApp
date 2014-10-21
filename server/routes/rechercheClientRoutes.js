@@ -17,4 +17,6 @@ module.exports = function(app){
 
     app.get('/crud/client/contacts/', rechercheClient.clientContacts);
 
+    app.post('/crud/client/site/subSite/', rechercheClient.saveSubSite);
+
 }
