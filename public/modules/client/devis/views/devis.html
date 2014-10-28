@@ -1,0 +1,98 @@
+<div data-ng-controller="clientDevisController">
+    <div ng-show="devisListDiv">
+
+        <div class="btn-group" style="margin-top: 1em; margin-bottom: 1em; margin-left: 1em">
+            <button type="button" class="btn btn-default glyphicon glyphicon-plus-sign" data-ng-click="addDevis()"> Ajouter Devis</button>
+        </div>
+
+        <div class="table-responsive table-border">
+
+            <table class="table table-hover">
+                <thead style="background-color: #080808; color: #f8f8f8;">
+                <tr>
+                    <th>N Devis</th>
+                    <th>Statut</th>
+                    <th>Etat</th>
+                    <th>Proprietaire</th>
+                    <th>Type devis</th>
+                    <th>Agence</th>
+                    <th>Montant</th>
+                    <th>Modification</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="client in clientList" data-ng-mouseenter="devis.showDelete = true" data-ng-mouseleave="devis.showDelete = false">
+                    <td>12</td>
+                    <td>abc</td>
+                    <td>sdfsf</td>
+                    <td>sdfsf</td>
+                    <td>fsdfsd</td>
+                    <td>dsfdsf</td>
+                    <td>dsfdsf</td>
+                    <td>dsfdsf</td>
+                    <td><button data-ng-class="{invisible:!devis.showDelete}" type="button" class="invisible btn btn-link btn-xs" data-ng-click="delete(devis)"><span class="glyphicon glyphicon-trash"></span></button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <div ng-show="addDevisDiv">
+        <div class="btn-group" style=" margin-top:1em; margin-bottom: 1em; margin-left: 1em">
+            <h3>Quel type de devis souhaitez vous ? </h3>
+        </div>
+
+        <form role="form" id="addDevisFormId" name="addDevisForm" ng-submit="registerDevis()">
+            <div class="row margin-top-left-1">
+                <div class="btn-toolbar">
+
+                    <div class="btn-group">
+
+                        <button class="btn btn-default" id="devis">Devis *</button>
+                        <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a value="Vente Produit"><b>Vente Produit</b>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="btn-group">
+                        <button class="btn btn-default" id="vente_produit">Type de vente produit</button>
+                        <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a>
+                                    <div value="standard"><b>Standard</b>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="btn-group">
+                        <button class="btn btn-default" id="type_de_devis">Type de devis * </button>
+                        <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a>
+                                    <div value="chubb" ><b>Chubb</b>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <button class="btn btn-default" ng-click="cancel()">annuler</button>
+                    <button type="submit" class="btn btn-default">enregister</button>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

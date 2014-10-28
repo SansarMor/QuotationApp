@@ -1,9 +1,11 @@
 'use strict';
 
 var mssql=require('mssql');
+
 /*
  * * Default Connection String
  */
+
 var connectionConfig = {
 	user : 'itgs2@o9mmw1xy9t',
 	password : '!5dm1n1!',

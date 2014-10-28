@@ -1,67 +1,97 @@
 <div data-ng-controller="rechercheClientController">
 
-    <div class="row" style="margin-top: 1em;margin-left: 1em">
-        <div class="col-md-6">
-            <form class="form-inline">
-                <div class="dataTables_length" id="example_length">
-                    <label style="display: inline-block">
-                        Show
-                        <select name="example_length" aria-controls="example" class="form-control input-sm">
-                            <option value="10">10</option>
-                            <option value="25">25</option>
-                            <option value="50">50</option>
-                            <option value="100">100</option>
-                        </select>
-                        entries
-                    </label>
-                </div>
-            </form>
+    <div id="example_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+
+        <div class="row" style="margin-top: 1em;margin-left: 1em">
+            <div class="col-md-2">
+                <label ng-click="showMoreCriteriaDiv()">plus de criteres</label>
+            </div>
+            <div class="col-md-10" ng-show="moreCriteriaDiv">
+
+                <form ng-submit="searchMoreCriteria()">
+                    <table>
+                        <tr>
+
+                            <td>ID Client:</td><td><input ng-model="search.AN8" ></td>
+                            <td>Nom Client:</td><td><input ng-model="search.corporate_name"></td>
+                            <td>Nom site:</td><td><input type="text" ng-model="search.NomSite"></td>
+                            <td>adresse :</td><td><input type="text" ng-model="search.address_1"></td>
+
+                        </tr>
+                        <tr>
+
+                            <td>Code Postal:</td><td><input type="text" ng-model="search.zip_code"></td>
+                            <td>ville:</td><td><input type="text" ng-model="search.city"></td>
+                            <td>SIRET:</td><td><input type="text" ng-model="search.SIRET"></td>
+                            <!--<td></td><td><input class="btn-primary" type="submit" value="Search"></td>-->
+                        </tr>
+
+                    </table>
+
+                </form>
+
+            </div>
         </div>
-        <div class="col-md-6">
-            <form class="form-inline">
-                <div id="example_filter" class="dataTables_filter">
-                    <label style="display: inline-block;margin-right: 1em">
-                        Search: <input id="searchInput" type="search" class="form-control input-sm" placeholder="search" aria-controls="example">
-                    </label>
-                </div>
-            </form>
+
+        <div class="row" style="margin-top: 1em;margin-left: 1em">
+            <div class="col-md-6">
+
+                        <div class="dataTables_length" id="example_length">
+                            <label>
+                                Show
+                                <select name="example_length" aria-controls="example" class="form-control input-sm">
+                                    <option value="10">10</option>
+                                    <option value="25">25</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                </select>
+                                entries
+                            </label>
+                        </div>
+
+            </div>
+            <div class="col-md-6">
+
+                    <div id="example_filter" class="dataTables_filter">
+                        <label style="display: inline-block;margin-right: 1em">
+                            Recherche globale : <input type="search" ng-model="search" class="form-control input-sm" placeholder>
+                        </label>
+                    </div>
+
+            </div>
+
         </div>
-        <!--<div class="input-append col-md-10">
-            <input type="text" class="search-query mac-style" placeholder="Search">
-        </div>-->
-    </div>
 
-    <!--<div class="btn-group" style="margin-top: 1em; margin-bottom: 1em; margin-left: 1em">
-        <button type="button" class="btn btn-default glyphicon glyphicon-plus-sign"> AjouterClient</button>
-    </div>-->
+        <div class="table-responsive table-border">
 
-    <div class="table-responsive table-border">
+                <table class="table table-hover table-striped" role="grid" data-search="true" aria-describedby="example_info">
+                    <thead style="background-color: #080808; color: #f8f8f8;">
+                    <tr>
+                        <th>ID Client</th>
+                        <th>Nom client</th>
+                        <th>Nom site</th>
+                        <th>adresse</th>
+                        <th>Code Postal</th>
+                        <th>ville</th>
+                        <th>SIRET</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr data-ng-repeat="client in clientList | filter:search">
+                    <!--<tr data-ng-repeat="client in clientList | filter:query">-->
+                        <td>{{client.AN8}}</td>
+                        <td>{{client.corporate_name}}</td>
+                        <td>{{client.NomSite}}</td>
+                        <td>{{client.address_1}}</td>
+                        <td>{{client.zip_code}}</td>
+                        <td>{{client.city}}</td>
+                        <td>{{client.SIRET}}</td>
+                        <td><a class="glyphicon glyphicon-zoom-in" data-ng-click="clientDetails(client)" data-ui-sref="clientDetails" title="More Details"></a></td>
+                    </tr>
+                    </tbody>
+                </table>
+        </div>
 
-            <table class="table table-hover table-striped" id="example" role="grid" data-search="true">
-                <thead style="background-color: #080808; color: #f8f8f8;">
-                <tr>
-                    <th>ID Client</th>
-                    <th>Nom client</th>
-                    <th>Nom site</th>
-                    <th>adresse</th>
-                    <th>Code Postal</th>
-                    <th>ville</th>
-                    <th>SIRET</th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr data-ng-repeat="client in clientList">
-                    <td>{{client.AN8}}</td>
-                    <td>{{client.corporate_name}}</td>
-                    <td>{{client.NomSite}}</td>
-                    <td>{{client.address_1}}</td>
-                    <td>{{client.zip_code}}</td>
-                    <td>{{client.city}}</td>
-                    <td>{{client.SIRET}}</td>
-                    <td><a class="glyphicon glyphicon-zoom-in" data-ng-click="clientDetails(client)" data-ui-sref="clientDetails" title="More Details"></a></td>
-                </tr>
-                </tbody>
-            </table>
     </div>
 </div>
