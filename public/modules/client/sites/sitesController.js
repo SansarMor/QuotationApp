@@ -2,9 +2,11 @@
 
 angular.module('QuotationApp.masters').controller('clientSitesController',['$scope','$http', 'rechercheClientService', function($scope, $http, rechercheClientService){
     console.log('inside client sites section');
+    $scope.siteDataDiv=true;
     $scope.clientDetails=rechercheClientService.getClientDetails();
+    console.dir($scope.clientDetails);
 
-    $http.get('crud/client/sites/'+$scope.clientDetails.AN8).success(function(data){
+    $http.get('crud/client/sites/'+$scope.clientDetails.id).success(function(data){
         console.log('client sites are : ');
         console.dir(data);
         $scope.clientSites=data;
@@ -14,31 +16,17 @@ angular.module('QuotationApp.masters').controller('clientSitesController',['$sco
     $scope.clientSitesList=true;
     $scope.viewClientSites=false;
     $scope.sitesListButton=false;
-    $scope.addSite=false;
+    $scope.addSite1=false;
     $scope.addSiteButton=true;
-
-
 
     $scope.viewClientSite=function(){
 
         $scope.clientSitesList=false;
         $scope.viewClientSites=true;
         $scope.sitesListButton=true;
-        $scope.addSite=false;
+        $scope.addSite1=false;
         $scope.addSiteButton=true;
-
-        $scope.clientSiteInfos = [
-            {
-                'title': 'Infos principales du site',
-                'state': 'infosPrincipalesDuSite'
-            },{
-                'title': 'Adresse',
-                'state': 'adresse'
-            },{
-                'title': 'Complements',
-                'state': 'complements'
-            }
-        ];
+        $scope.clientSiteBodyURL='modules/client/sites/views/viewSite.html';
 
     };
 
@@ -48,30 +36,21 @@ angular.module('QuotationApp.masters').controller('clientSitesController',['$sco
         $scope.clientSitesList=true;
         $scope.viewClientSites=false;
         $scope.sitesListButton=false;
-        $scope.addSite=false;
+        $scope.addSite1=false;
 
     };
 
     $scope.addSite=function(){
         console.log('inside add site function');
-      $scope.addSite=true;
+      $scope.addSite1=true;
+      $scope.viewClientSites=false;
       $scope.clientSitesList=false;
       $scope.addSiteButton=false;
       $scope.sitesListButton=true;
       $scope.addSiteSaveButton=true;
 
-        $scope.clientSiteInfos = [
-            {
-                'title': 'Infos principales du site',
-                'state': 'addInfosPrincipalesDuSite'
-            },{
-                'title': 'Adresse',
-                'state': 'addAdresse'
-            },{
-                'title': 'Complements',
-                'state': 'addComplements'
-            }
-        ];
+        $scope.clientSiteBodyURL='modules/client/sites/views/addSite.html';
+
     };
 
     $scope.cancelSaveSiteSection=function(){
@@ -79,7 +58,7 @@ angular.module('QuotationApp.masters').controller('clientSitesController',['$sco
         $scope.addSiteButton=true;
         $scope.sitesListButton=false;
         $scope.addSiteSaveButton=false;
-        $scope.addSite=false;
+        $scope.addSite1=false;
     };
 
     $scope.cancelSubSiteSection=function(){
@@ -100,15 +79,18 @@ angular.module('QuotationApp.masters').controller('clientSitesController',['$sco
       console.log('sub site parameters are : ');
       console.dir(subSiteParameters);
       $http.post('crud/client/site/subSite/', subSiteParameters).then(function () {
-            /*$scope.signupalert=true;*/
+
             console.log('inside save sub site method after saving data');
             $scope.addSubSite=false;
-            /*Session.create(res.id, res.userid, res.role);*/
+
         });
 
     };
 
-    $scope.showClientSiteSection=function(clientSiteInfo){
-        $scope.clientSiteBodyURL='modules/client/sites/views/'+clientSiteInfo.state+'.html';
-    };
+    $scope.addQuote=function(clientSite){
+        console.log('inside add quote for client site');
+        $scope.siteDataDiv=false;
+        $scope.selectedSite=clientSite;
+        $scope.clientSiteQuoteBodyURL='modules/client/devis/views/devis.html';
+    }
 }]);

@@ -1,6 +1,6 @@
 <div data-ng-controller="clientSitesController">
 
-    <div>
+    <div ng-show="siteDataDiv">
         <div class="btn-group" style="margin-top: 1em; margin-bottom: 1em; margin-left: 1em" ng-show="addSiteButton">
             <button type="button" class="btn btn-default glyphicon glyphicon-plus-sign" ng-click="addSite()"> Ajouter Site</button>
         </div>
@@ -32,14 +32,14 @@
                         </div>
 
                         <div class="row">
-                            <a class="glyphicon glyphicon-plus-sign"></a>
+                            <a ng-click="addQuote(clientSite)" class="glyphicon glyphicon-plus-sign"></a>
                         </div>
 
                     </div>
                 </div>
 
                 <div class="row" ng-show="addSubSite">
-                    <form role="form" id="clientSubSiteFormId" name="clientSubSiteForm" ng-submit="saveClientSubSite(subSiteParameters)">
+                    <form role="form" id="clientSubSiteFormId" name="clientSubSiteForm">
                         <div class="col-md-1">
                             Nom du sous-site
                         </div>
@@ -53,18 +53,18 @@
                         </div>
                         <div class="col-md-1">
 
-                            <button type="submit" class="btn btn-default">enregister</button>
+                            <button ng-click="saveClientSubSite(subSiteParameters)" class="btn btn-default">enregister</button>
                         </div>
                     </form>
                 </div>
 
-                <div class="row margin-top-left-1">
+                <!--<div class="row margin-top-left-1">
                     Batiment A
-                </div>
+                </div>-->
             </div>
         </div>
         <div ng-show="viewClientSites">
-            <div class="row" style="background-color: transparent">
+           <!-- <div class="row" style="background-color: transparent">
                 <div class="span12">
                     <ul class="nav nav-tabs">
                         <li data-ng-repeat="clientSiteInfo in clientSiteInfos" data-ui-sref-active="active">
@@ -73,13 +73,13 @@
                     </ul>
                 </div>
 
-            </div>
+            </div>-->
 
             <p ng-include="clientSiteBodyURL"></p>
         </div>
 
-        <div ng-show="addSite">
-            <div class="row" style="background-color: transparent">
+        <div ng-show="addSite1">
+            <!--<div class="row" style="background-color: transparent">
                 <div class="span12">
                     <ul class="nav nav-tabs">
                         <li data-ng-repeat="clientSiteInfo in clientSiteInfos" data-ui-sref-active="active">
@@ -88,7 +88,7 @@
                     </ul>
                 </div>
 
-            </div>
+            </div>-->
 
             <p ng-include="clientSiteBodyURL"></p>
 
@@ -98,5 +98,11 @@
             </div>
 
         </div>
+
     </div>
+
+    <div>
+        <p ng-include="clientSiteQuoteBodyURL"></p>
+    </div>
+
 </div>

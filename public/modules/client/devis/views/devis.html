@@ -43,33 +43,33 @@
             <h3>Quel type de devis souhaitez vous ? </h3>
         </div>
 
-        <form role="form" id="addDevisFormId" name="addDevisForm" ng-submit="registerDevis()">
+        <form role="form" id="addDevisFormId" name="addDevisForm">
             <div class="row margin-top-left-1">
                 <div class="btn-toolbar">
 
                     <div class="btn-group">
 
-                        <button class="btn btn-default" id="devis">Devis *</button>
+                        <button class="btn btn-default" id="devis">   Devis *    </button>
                         <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu">
                             <li>
-                                <a value="Vente Produit"><b>Vente Produit</b>
-                                </a>
+                                <a data-ng-click="devisSelected('Vente Produit')" value="venteProduit">Vente Produit</a>
+                                <a data-ng-click="devisSelected('Contrat de maintenance')" value="contratDeMaintenance">Contrat de maintenance</a>
+                                <a data-ng-click="devisSelected('Etude R4')" value="etudeR4">Etude R4</a>
                             </li>
                         </ul>
                     </div>
 
                     <div class="btn-group">
-                        <button class="btn btn-default" id="vente_produit">Type de vente produit</button>
+                        <button class="btn btn-default" id="devis_type">Type de vente produit</button>
                         <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu">
                             <li>
-                                <a>
-                                    <div value="standard"><b>Standard</b>
-                                    </div>
-                                </a>
+                                <a data-ng-click="venteProductTypeSelected('Standard')" value="standard">Standard</a>
+                                <a data-ng-click="venteProductTypeSelected('Distributeur')" value="distributeur">Distributeur</a>
+                                <a data-ng-click="venteProductTypeSelected('Installateur')" value="installateur">Installateur</a>
                             </li>
                         </ul>
                     </div>
@@ -79,20 +79,22 @@
                         <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu">
-                            <li>
-                                <a>
-                                    <div value="chubb" ><b>Chubb</b>
-                                    </div>
-                                </a>
+                            <li  data-ng-repeat="devisType in devisTypeList">
+                                <a data-ng-click="devisTypeSelected(devisType)">{{devisType.name}}</a>
                             </li>
                         </ul>
                     </div>
 
-                    <button class="btn btn-default" ng-click="cancel()">annuler</button>
-                    <button type="submit" class="btn btn-default">enregister</button>
+                    <button class="btn btn-default" ng-click="cancelDevis()">annuler</button>
+                    <button ng-click="registerDevis()" class="btn btn-default">enregister</button>
 
                 </div>
             </div>
         </form>
     </div>
+
+    <div>
+        <p ng-include="devisPanierBodyURL"></p>
+    </div>
+
 </div>

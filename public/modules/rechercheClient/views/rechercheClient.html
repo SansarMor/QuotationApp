@@ -54,7 +54,7 @@
 
                     <div id="example_filter" class="dataTables_filter">
                         <label style="display: inline-block;margin-right: 1em">
-                            Recherche globale : <input type="search" ng-model="search" class="form-control input-sm" placeholder>
+                            Recherche globale : <input type="text" ng-model="query">
                         </label>
                     </div>
 
@@ -64,7 +64,7 @@
 
         <div class="table-responsive table-border">
 
-                <table class="table table-hover table-striped" role="grid" data-search="true" aria-describedby="example_info">
+                <table class="table table-hover" role="grid" data-search="true" aria-describedby="example_info">
                     <thead style="background-color: #080808; color: #f8f8f8;">
                     <tr>
                         <th>ID Client</th>
@@ -78,7 +78,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr data-ng-repeat="client in clientList | filter:search">
+                    <tr data-ng-repeat="client in clientList | filter:search | filter:query">
                     <!--<tr data-ng-repeat="client in clientList | filter:query">-->
                         <td>{{client.AN8}}</td>
                         <td>{{client.corporate_name}}</td>
