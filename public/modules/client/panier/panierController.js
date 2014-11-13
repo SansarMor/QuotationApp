@@ -2,9 +2,7 @@
 
 angular.module('QuotationApp.masters').controller('ClientPanierController',['$rootScope','$scope', '$http', 'rechercheClientService', function($rootScope, $scope, $http, rechercheClientService){
 
-
-
-
+    $scope.catalogueItemsList=[];
     $scope.initFunction=function(){
         $scope.actualPanierList=[];
         $scope.actualPanier={
@@ -17,7 +15,8 @@ angular.module('QuotationApp.masters').controller('ClientPanierController',['$ro
             Description: '',
             Date_Created: '',
             StatusFlag:'',
-            SyncTimesstamp:''
+            SyncTimesstamp:'',
+            catalogueList:[]
         };
         console.log('inside init function');
         $http.get('crud/client/Quote/Panier/' + $scope.currentQuote.Quotation_id).success(function (data) {
@@ -33,6 +32,7 @@ angular.module('QuotationApp.masters').controller('ClientPanierController',['$ro
                     $scope.actualPanier.Date_Created=panier.Date_Created;
                     $scope.actualPanier.StatusFlag=panier.StatusFlag;
                     $scope.actualPanier.SyncTimesstamp=panier.SyncTimesstamp;
+                    $scope.actualPanier.catalogueList=$scope.fetchedCatalogueList;
                     $scope.clientSites.forEach(function(clientSite,index){
                        if(clientSite.id == panier.Site_id){
                            $scope.actualPanier.Site_name=clientSite.MLNM;
@@ -50,6 +50,9 @@ angular.module('QuotationApp.masters').controller('ClientPanierController',['$ro
 
     $scope.divAddParagraph=false;
     $scope.divPanier=true;
+    $scope.catalogueIncludeDiv=false;
+    $scope.recycleCatIncludeDiv=false;
+    $scope.editCatIncludeDiv=false;
 
     $scope.addParagraph=function(){
         $scope.divAddParagraph=true;
@@ -107,5 +110,78 @@ angular.module('QuotationApp.masters').controller('ClientPanierController',['$ro
         }
 
     }
+
+    $scope.addCatalogue=function(actualPanier){
+        console.log('inside add catalogue');
+        console.dir(actualPanier);
+        $scope.divAddParagraph=false;
+        $scope.divPanier=false;
+        $scope.catalogueIncludeDiv=true;
+        $scope.quoteCatalogueBodyURL='modules/client/catalogue/views/catalogue.html';
+    }
+
+    $rootScope.$on('catalogueSelectedList', function(event, catalogueList, catalogueQuant) {
+
+        $scope.fetchedCatalogueList=[];
+
+        catalogueList.forEach(function(catalogue, index){
+            $scope.catalogueSelectedItem={
+                catalogue:catalogue,
+                qteTotal:'',
+                qteCompl:'',
+                qteRecy:''
+            }
+            $scope.catalogueSelectedItem.qteTotal=catalogueQuant;
+            $scope.catalogueSelectedItem.qteCompl=catalogueQuant;
+            $scope.catalogueSelectedItem.qteRecy=0;
+            $scope.fetchedCatalogueList.push($scope.catalogueSelectedItem);
+        });
+
+        /*$scope.fetchedCatalogueList=catalogueList;*/
+        $scope.divAddParagraph=false;
+        $scope.divPanier=true;
+        $scope.catalogueIncludeDiv=false;
+        $scope.initFunction();
+    });
+
+    $scope.ajouterRecycle=function(actualPanier){
+
+        $scope.divAddParagraph=false;
+        $scope.divPanier=false;
+        $scope.catalogueIncludeDiv=false;
+        $scope.recycleCatIncludeDiv=true;
+        $scope.quoteRecycleCatalogueBodyURL='modules/client/recyCatalogue/views/recyCatalogue.html';
+    }
+
+    $rootScope.$on('catalogueRecyItemsSelectedList', function(event, selectedRecyItemsList) {
+
+        console.log('welcome back');
+        $scope.divAddParagraph=false;
+        $scope.divPanier=true;
+        $scope.catalogueIncludeDiv=false;
+        $scope.recycleCatIncludeDiv=false;
+        $scope.editCatIncludeDiv=false;
+        console.dir(selectedRecyItemsList);
+    });
+
+    $scope.editQuoteCatalogue=function(catalogueSelectedItem){
+
+        $scope.divAddParagraph=false;
+        $scope.divPanier=false;
+        $scope.catalogueIncludeDiv=false;
+        $scope.recycleCatIncludeDiv=false;
+        $scope.editCatIncludeDiv=true;
+        $scope.selectedEditCatalogueItem =catalogueSelectedItem;
+        $scope.quoteEditCatalogueBodyURL='modules/client/updateCatalogue/views/updateCatalogue.html';
+
+    }
+
+    $rootScope.$on('catalogueUpdatedItemsSavedList', function(event, selectedEditCatalogueItem){
+
+        console.log('welcome back');
+        console.dir($scope.selectedEditCatalogueItem);
+        console.log('fetched catalogue list');
+        console.dir($scope.fetchedCatalogueList);
+    })
 
 }]);

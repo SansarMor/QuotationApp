@@ -29,4 +29,23 @@ module.exports = function(app){
 
     app.get('/crud/client/Quote/Panier/:selectedQuote', rechercheClient.fetchPanier);
 
+    app.get('/crud/client/Quote/Catalogue/Category/:selectedDevisType', rechercheClient.getCategories);
+
+    app.get('/crud/client/Quote/Catalogue/family/:selectedDevisType', rechercheClient.getFamilies);
+
+    app.get('/crud/client/Quote/Catalogue/subFamily/:selectedDevisType', rechercheClient.getSubFamilies);
+
+    app.get('/crud/client/Quote/Catalogue/items/', rechercheClient.getItemList);
+
+    app.get('/crud/client/Quote/Catalogue/Items/byFamily/:familyKY', rechercheClient.getCategoryByFamily);
+
+    app.get('/crud/client/Quote/Catalogue/Items/Family/bySubFamily/:subFamilyXY', rechercheClient.getFamilyBySubFamily);
+
+    app.get('/crud/client/Quote/Catalogue/Items/componentItems/:item_usual_code', rechercheClient.getComponentItems);
+
+    app.get('/crud/client/Quote/Catalogue/Items/fetchInstallComponentItems/:item_usual_code', rechercheClient.fetchInstalledComponentItem);
+
+    app.get('/crud/client/Quote/recyCatalogue/items/:LANOValue', rechercheClient.fetchRecycleItemsList);
+
+    app.get('/crud/client/Quote/Catalogue/allItems/', rechercheClient.getAllItemsList);
 }

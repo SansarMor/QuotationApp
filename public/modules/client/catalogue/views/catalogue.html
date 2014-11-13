@@ -1,0 +1,132 @@
+<div data-ng-controller="clientQuoteCatalogueController">
+
+    <div class="row">
+        <div class="col-md-3">
+            <b style="margin-left: 1em">Catalogue</b>
+        </div>
+
+    </div>
+
+    <modal-dialog show='modalShown' width='50%' height='40%'>
+
+        <div class="row" style="background-color: #D3D3D3; margin-left: 0em; margin-right: 0em">
+            <b>Ajouter du catalogue</b>
+        </div>
+
+        <div style="margin-top: 2em">
+            <div class="row">
+                <div class="col-lg-2">
+                    <label>Quantite</label>
+                </div>
+                <div class="col-lg-2">
+                    <input class="form-control" type="text" ng-model="catalogueQuant">
+                </div>
+                <button class=" btn btn-default" ng-click="cancelCatalogueQuant()">annuler</button>
+                <button ng-click="registerCatalogueQuant(selectedItem, catalogueQuant)" class="btn btn-default">enregister</button>
+            </div>
+        </div>
+
+    </modal-dialog>
+
+    <div class="row" style="margin-left: 1em;margin-top: 2em">
+        <div class="col-md-3">
+            <div class="row">
+                <label>Code art.</label>
+            </div>
+            <div class="row">
+                <div class="col-md-5">
+                    <input id="codeArtId" type="text" class="form-control" placeholder="">
+                </div>
+                <div class="col-md-1 col-lg-offset-5" ng-show="showMainItemTagDiv">
+                    <a ng-click="showAllFilterdItems()" class="glyphicon glyphicon-tags"></a>
+                </div>
+            </div>
+            <div class="row">
+                 <label>Categorie</label>
+            </div>
+            <div class="row">
+                <div class="btn-group" style="margin-left: 1em">
+
+                    <button class="btn btn-default" id="categoryId">Selection categorie</button>
+                    <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li data-ng-repeat="category in categoriesList">
+                            <a data-ng-click="fetchItemsByCateogy(category)" value="{{category.id}}">{{category.DL01}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <label>Famille</label>
+            </div>
+            <div class="row">
+                <div class="btn-group" style="margin-left: 1em">
+
+                    <button class="btn btn-default" id="familyId">Selection famille</button>
+                    <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li data-ng-repeat="family in familliesList">
+                            <a data-ng-click="fetchItemsByFamily(family)" value="{{family.id}}">{{family.DL01}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <label>Sous-Famille</label>
+            </div>
+            <div class="row">
+                <div class="btn-group" style="margin-left: 1em">
+
+                    <button class="btn btn-default" id="subFamilyId">Selection sous-famille</button>
+                    <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li data-ng-repeat="subFamily in subFamilliesList">
+                            <a data-ng-click="fetchItemsBySubFamily(subFamily)" value="{{subFamily.id}}">{{subFamily.DL01}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <label>Description</label>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <input type="text" class="form-control" placeholder="Description" ng-model="searchDes.description_1">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8" style="margin-left: 1em">
+
+            <div class="table-responsive table-border">
+
+                <table class="table">
+                    <thead style="background-color: #080808; color: #f8f8f8;">
+                    <tr>
+                        <th>Code art.</th>
+                        <th>Description</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody ng-if="actualItemsList.length>0">
+                    <tr data-ng-repeat="item in actualItemsList | filter:searchDes">
+
+                        <td>{{item.usual_code}}</td>
+                        <td>{{item.description_1}}</td>
+                        <td></td>
+                        <td><a ng-click="fetchComponentItems(item)" class="glyphicon glyphicon-tags"></a></td>
+                        <td><a title="Ajouter du catalogue" ng-click="addItemToCart(item)" class="glyphicon glyphicon-plus-sign"></a></td>
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+</div>

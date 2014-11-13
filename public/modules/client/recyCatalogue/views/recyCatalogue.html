@@ -1,0 +1,83 @@
+<div data-ng-controller="clientQuoteRecyCatalogueController">
+
+    <div class="row margin-top-1">
+        <div class="col-lg-offset-5 col-lg-6">
+            filter par
+
+            <div class="btn-group" style="margin-left: 1em">
+
+                <button class="btn btn-default" id="filterId">Filter Par</button>
+                <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a>tous</a>
+                    </li>
+                    <li data-ng-repeat="recyItemFilter in recyItemsFilterByList">
+                        <a></a>
+                    </li>
+                </ul>
+            </div>
+
+            activite
+            <div class="btn-group" style="margin-left: 1em">
+
+                <button class="btn btn-default" id="activiteId">Selection activite</button>
+                <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li data-ng-repeat="activite in activitesList">
+                        <a></a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <b style="margin-left: 1em">Parc du site</b>
+        </div>
+        <div class="col-lg-1">
+            <button ng-click="saveRecySelectedItems()" class="btn btn-default">Save</button>
+        </div>
+
+    </div>
+    <div class="row margin-top-left-1" style="margin-right: 1em">
+        <div class="table-responsive table-border">
+
+            <table class="table">
+                <thead style="background-color: #080808; color: #f8f8f8;">
+                <tr>
+                    <th></th>
+                    <th>Batiment</th>
+                    <th>Etage</th>
+                    <th>Emplacement</th>
+                    <th>Code art.</th>
+                    <th>Description</th>
+                    <th>Num. appareil</th>
+                    <th>Date fabric.</th>
+                    <th>Age</th>
+                    <th>Date verif.</th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody data-ng-show="actualRecyItemList.length>0">
+                    <tr data-ng-repeat="actualRecyItem in actualRecyItemList">
+                        <td><input type="checkbox" data-ng-click="recyItemSelected(actualRecyItem, recyItemModelCheckbox)" ng-model="recyItemModelCheckbox"></td>
+                        <td>{{actualRecyItem.recyItem.Y56INDLA}}</td>
+                        <td>{{actualRecyItem.recyItem.Y56ETAG}}</td>
+                        <td>{{actualRecyItem.recyItem.Y56EMPLA}}</td>
+                        <td>{{actualRecyItem.usual_Code}}</td>
+                        <td>{{actualRecyItem.description_1}}</td>
+                        <td>{{actualRecyItem.recyItem.NUMB}}</td>
+                        <td>{{actualRecyItem.recyItem.FBDUMSDJ}}</td>
+                        <td></td>
+                        <td>{{actualRecyItem.recyItem.U74SCDV}}</td>
+                        <td><a ng-click="fetchComponentItems(actualRecyItem)" class="glyphicon glyphicon-tags"></a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

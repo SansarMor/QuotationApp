@@ -28,4 +28,10 @@ angular.module('QuotationApp.masters').controller('rechercheClientController', [
         console.log('client name is :- '+$scope.client.corporate_name);
     }
 
+    $scope.modalShown = false;
+    $scope.toggleModal = function() {
+        console.log('inside toggleModal function');
+        $scope.modalShown = !$scope.modalShown;
+    };
+
 }]);

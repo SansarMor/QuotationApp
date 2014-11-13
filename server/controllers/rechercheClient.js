@@ -114,3 +114,92 @@ exports.fetchPanier=function(req, res){
         res.jsonp(data);
     });
 }
+
+exports.getCategories=function(req, res){
+    var activeChapter=req.params.selectedDevisType;
+    var sqlQuery="select * from UDC where SY='41' and RT='10' and KY in (select distinct family from Item_Family_Hierarchy where sub_family in (select activity from Chapter where name ='"+activeChapter+"') and family_level= 'SRP0')";
+    new mssql.SqlConnection(sqlQuery, function(data){
+        console.log('fetched data for category is : '+data);
+        res.jsonp(data);
+    });
+}
+
+exports.getFamilies=function(req, res){
+    var activeChapter=req.params.selectedDevisType;
+    var sqlQuery="select * from UDC where SY='41' and RT='S1' and KY in (select activity from Chapter where name='"+activeChapter+"')";
+    new mssql.SqlConnection(sqlQuery, function(data){
+        console.log('fetched data for family is : '+data);
+        res.jsonp(data);
+    });
+}
+
+exports.getSubFamilies=function(req, res){
+    var activeChapter=req.params.selectedDevisType;
+    var sqlQuery="select * from UDC where SY='41' and RT='S2' and KY in (select sub_family from Item_Family_Hierarchy where family in (select activity from Chapter where name='"+activeChapter+"') and family_level='SRP1')";
+    new mssql.SqlConnection(sqlQuery, function(data){
+        console.log('fetched data for sub family is : '+data);
+        res.jsonp(data);
+    });
+}
+
+exports.getItemList=function(req, res){
+    var sqlQuery="select * from ITEM where PRP0='P' ";
+    new mssql.SqlConnection(sqlQuery, function(data){
+        console.log('Items list : '+data);
+        res.jsonp(data);
+    });
+}
+
+exports.getAllItemsList=function(req, res){
+    var sqlQuery="select * from ITEM";
+    new mssql.SqlConnection(sqlQuery, function(data){
+        console.log('all Items list : '+data);
+        res.jsonp(data);
+    });
+}
+
+exports.getCategoryByFamily=function(req, res){
+
+    var sqlQuery="select * from Item_Family_Hierarchy where sub_family = '" + req.params.familyKY + "'  and family_level = 'SRP0'";
+    new mssql.SqlConnection(sqlQuery, function(data){
+        console.log('selected category is : '+data);
+        res.jsonp(data);
+    });
+}
+
+exports.getFamilyBySubFamily=function(req, res){
+
+    var sqlQuery="select * from Item_Family_Hierarchy where sub_family = '" + req.params.subFamilyXY + "'  and family_level = 'SRP1'";
+    new mssql.SqlConnection(sqlQuery, function(data){
+        console.log('selected family is : '+data);
+        res.jsonp(data);
+    });
+}
+
+exports.getComponentItems=function(req, res){
+
+    var sqlQuery="select * FROM ITEM where ITM in (select component_ITM from Item_Composition where compound_ITM = (select ITM from Item where usual_code = '"+req.params.item_usual_code+"') and option_type in(0,1)) and PRP0 = 'P'";
+    new mssql.SqlConnection(sqlQuery, function(data){
+        console.log('fetched component item is : '+data);
+        res.jsonp(data);
+    });
+}
+
+/*fetch installed item*/
+exports.fetchInstalledComponentItem=function(req, res){
+
+    var sqlQuery="select * FROM ITEM where ITM in (select component_ITM from Item_Composition where compound_ITM = (select ITM from Item where usual_code = '"+req.params.item_usual_code+"') and option_type='2')";
+    new mssql.SqlConnection(sqlQuery, function(data){
+        console.log('fetched install item is : '+data);
+        res.jsonp(data);
+    });
+}
+
+exports.fetchRecycleItemsList=function(req, res){
+
+    var sqlQuery="select * FROM Customer_Installed_Base where LANO='"+req.params.LANOValue+"' ";
+    new mssql.SqlConnection(sqlQuery, function(data){
+        console.log('fetched recycle items are : '+data);
+        res.jsonp(data);
+    });
+}
