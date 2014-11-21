@@ -3,36 +3,36 @@
     <div class="btn-group" style="margin-left: 1em">
         <h3>DETAIL</h3>
     </div>
-    <hr style="background-color: #000000">
+    <hr style="background-color: #000000;margin-top: 0px">
 
     <div class="row margin-top-left-1">
         <div class="col-lg-1">
-            {{selectedEditCatalogueItem.catalogue.usual_code}}
+            {{selectedEditCatalogueItem.item.usual_code}}
         </div>
         <div class="col-lg-2">
-            {{selectedEditCatalogueItem.catalogue.description_1}}
+            {{selectedEditCatalogueItem.item.description_1}}
         </div>
     </div>
 
     <div ng-repeat="editItem in editItemsList">
         <div class="row margin-top-1">
             <div class="col-sm-1 col-sm-offset-1">
-                <input type="text" placeholder="Batiment" ng-model="editItem.batiment">
+                <input type="text" placeholder="Batiment" ng-model="editItem.building">
             </div>
             <div class="col-sm-1 col-sm-offset-1">
-                <input type="text" placeholder="Etage" ng-model="editItem.etage">
+                <input type="text" placeholder="Etage" ng-model="editItem.floor">
             </div>
             <div class="col-sm-2 col-sm-offset-1">
-                <input type="text" placeholder="Emplacement" ng-model="editItem.emplacement">
+                <input type="text" placeholder="Emplacement" ng-model="editItem.location">
             </div>
             <div class="col-sm-1 col-sm-offset-1">
-                <input type="checkbox" ng-model="editItem.pose" disabled>Pose
+                <input type="checkbox" ng-model="editItem.install">Pose
             </div>
             <div class="col-sm-1">
-                <input type="checkbox" ng-model="editItem.recyclage">Recyclage
+                <input type="checkbox" ng-model="editItem.recycle">Recyclage
             </div>
             <div class="col-sm-1">
-                <input type="checkbox" ng-model="editItem.supprimer">supprimer
+                <input type="checkbox" ng-model="editItem.isReplacement">supprimer
             </div>
         </div>
     </div>

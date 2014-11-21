@@ -20,11 +20,11 @@ var connectionConfig = {
  * * SqlConnection
  */
 
+/*
 exports.SqlConnection = function(sqlQuery, callback) {
 	console.log('inside SqlConnection function');
 	mssql.connect(connectionConfig, function(err_connect) {
-	    // ... error checks
-	    // Query
+
 		console.log('inside connect, error is : ' +err_connect);
 
 	    var request = new mssql.Request();
@@ -38,4 +38,22 @@ exports.SqlConnection = function(sqlQuery, callback) {
 	    });
 
 	});
+}*/
+
+
+exports.getSqlConnection = function(callback) {
+
+    mssql.connect(connectionConfig, function(err_connect) {
+
+    var request = new mssql.Request();
+    callback(request);
+    });
+}
+
+exports.SqlConnection=function(request, sqlQuery, callback){
+
+    request.query(sqlQuery, function(err_query, recordset) {
+
+        callback(recordset);
+    });
 }

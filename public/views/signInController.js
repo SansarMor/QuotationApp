@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('QuotationApp.system').controller('signInController', ['$scope', '$state', function($scope, $state) {
+angular.module('QuotationApp.system').controller('signInController', ['$http', '$scope', '$state', function($http, $scope, $state) {
 
             $scope.loginbox=true;
             $scope.loginAlert=false;
@@ -13,9 +13,11 @@ angular.module('QuotationApp.system').controller('signInController', ['$scope', 
 
 			$scope.login = function(credentials) {
 
-                $scope.indexId=true;
-                $scope.loginbox=false;
-
+                $http.get('quotationApp/createDatabaseConnection/').success(function (data) {
+                   console.log('database connection established');
+                    $scope.indexId=true;
+                    $scope.loginbox=false;
+                });
 			}
 
 		}]);

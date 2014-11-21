@@ -7,6 +7,24 @@
             <button type="button" class="btn btn-default glyphicon glyphicon-plus-sign" data-ng-click="addParagraph()"> Ajouter Paragraphe</button>
         </div>
 
+        <modal-dialog show='editQuoteParagraph' width='50%' height='35%'>
+
+            <div class="row" style="background-color: #D3D3D3; margin-left: 0em; margin-right: 0em">
+                <b>Edit Description</b>
+            </div>
+
+            <div style="margin-top: 2em">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <textarea class="form-control" type="text" ng-model="selectedQPForUpdate.Description"></textarea>
+                    </div>
+                    <button class=" btn btn-default" ng-click="cancelQuoteDescription()">annuler</button>
+                    <button ng-click="updateQuoteDescription(selectedQPForUpdate)" class="btn btn-default">enregister</button>
+                </div>
+            </div>
+
+        </modal-dialog>
+
         <div class="table-responsive table-border">
 
             <table class="table">
@@ -24,7 +42,7 @@
                 </tr>
                 </thead>
                 <tbody data-ng-show="actualPanierList.length>0">
-                <tr data-ng-repeat="actualPanier in actualPanierList track by $index">
+                <tr data-ng-repeat="actualPanier in actualPanierList">
 
                         <tr style="background-color: #D3D3D3">
                             <td colspan="6">
@@ -41,25 +59,26 @@
                             </td>
                         </tr>
                         <tr style="background-color: #D3D3D3">
-                            <td colspan="9">
-                                <b>{{actualPanier.Description}}</b>
+                            <td colspan="8">
+                                <b>{{actualPanier.panier.Description}}</b>
+                            </td>
+                            <td>
+                                <a title="Edit Description" ng-click="editQuoteDescription(actualPanier)" class="glyphicon glyphicon-pencil"></a>
                             </td>
                         </tr>
                         <tr data-ng-repeat="catalogueSelectedItem in actualPanier.catalogueList">
                                 <td>DFF001</td>
-                                <td>{{catalogueSelectedItem.catalogue.usual_code}}</td>
-                                <td>{{catalogueSelectedItem.catalogue.description_1}}</td>
-                                <td>{{catalogueSelectedItem.qteTotal}}</td>
-                                <td>{{catalogueSelectedItem.qteCompl}}</td>
-                                <td>{{catalogueSelectedItem.qteRecy}}</td>
+                                <td>{{catalogueSelectedItem.item.usual_code}}</td>
+                                <td>{{catalogueSelectedItem.item.description_1}}</td>
+                                <td>{{catalogueSelectedItem.quoteParaProd.Quantity_Total}}</td>
+                                <td>{{catalogueSelectedItem.quoteParaProd.Quantity_Additional}}</td>
+                                <td>{{catalogueSelectedItem.quoteParaProd.Quantity_Replaced}}</td>
 
-                                <td><a title="Edit" ng-click="editQuoteCatalogue(catalogueSelectedItem)" class="glyphicon glyphicon-pencil"></a></td>
-                                <td><a title="Component catalogue" ng-click="showAllComponentItems()" class="glyphicon glyphicon-tags"></a></td>
-                                <td><a title="Delete" ng-click="deleteQuoteCatalogue()" class="glyphicon glyphicon-remove-circle"></a></td>
+                                <td><a ng-if="catalogueSelectedItem.quoteParaProd.StatusFlag" title="Edit" ng-click="editQuoteCatalogue(catalogueSelectedItem)" class="glyphicon glyphicon-pencil"></a></td>
+                                <td><a ng-if="catalogueSelectedItem.quoteParaProd.StatusFlag" title="Component catalogue" ng-click="showAllComponentItems(catalogueSelectedItem)" class="glyphicon glyphicon-tags"></a></td>
+                                <td><a ng-if="catalogueSelectedItem.quoteParaProd.StatusFlag" title="Delete" ng-click="deleteQuoteCatalogue(catalogueSelectedItem)" class="glyphicon glyphicon-remove-circle"></a></td>
                         </tr>
-                        <!--<tr style="background-color: #D3D3D3">
-                            <td colspan="9" ng-if="actualPanier.Description!='null'"> </td>
-                        </tr>-->
+
                 </tr>
                 </tbody>
             </table>
@@ -112,7 +131,7 @@
                     <div class="col-md-2">
                         <div class="form-group">
                                 <label>Commentaire de la section</label>
-                                <textarea class="form-control" rows="2" ng-model="paragraphDescription" placeholder="Description section"></textarea>
+                                <textarea class="form-control" rows="2" ng-model="paragraphDescription" placeholder="Description section" id="paraDescriptionId"></textarea>
                         </div>
                     </div>
 

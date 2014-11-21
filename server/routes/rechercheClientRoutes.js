@@ -10,6 +10,8 @@ module.exports = function(app){
      * */
         // Home route
 
+    app.get('/quotationApp/createDatabaseConnection/', rechercheClient.createDatabaseConnection);
+
     app.get('/crud/clients',rechercheClient.all);
 
 
@@ -29,6 +31,8 @@ module.exports = function(app){
 
     app.get('/crud/client/Quote/Panier/:selectedQuote', rechercheClient.fetchPanier);
 
+    app.post('/crud/client/Quote/updateQuoteParaDescription/:quoteParaId/:quoteParaDesc', rechercheClient.updateQuoteParaDescription);
+
     app.get('/crud/client/Quote/Catalogue/Category/:selectedDevisType', rechercheClient.getCategories);
 
     app.get('/crud/client/Quote/Catalogue/family/:selectedDevisType', rechercheClient.getFamilies);
@@ -45,7 +49,23 @@ module.exports = function(app){
 
     app.get('/crud/client/Quote/Catalogue/Items/fetchInstallComponentItems/:item_usual_code', rechercheClient.fetchInstalledComponentItem);
 
+    app.get('/crud/client/Quote/Catalogue/Items/fetchRecycleComponentItems/:item_usual_code', rechercheClient.fetchRecycleComponentItem);
+
     app.get('/crud/client/Quote/recyCatalogue/items/:LANOValue', rechercheClient.fetchRecycleItemsList);
 
     app.get('/crud/client/Quote/Catalogue/allItems/', rechercheClient.getAllItemsList);
+
+    app.get('/crud/client/Quote/Catalogue/getQPPByItemIdAndQPId/:selectedQPId/:selectedItemId', rechercheClient.getQPPByItemIdAndQPId);
+
+    app.post('/crud/client/Quote/Catalogue/saveQuoteParagraphProduct/', rechercheClient.saveQuotationParagraphProduct);
+
+    app.post('/crud/client/Quote/Catalogue/updateQuoteParagraphProduct/', rechercheClient.updateQuotationParagraphProduct);
+
+    app.get('/crud/client/Quote/paragraph/allQuoteParaProduct/', rechercheClient.getAllQuoteParaProducts);
+
+    app.post('/crud/client/Quote/Catalogue/QuoteParagraphProduct/saveQuoteParagraphProductDetail/', rechercheClient.saveQuotationParagraphProductDetail);
+
+    app.post('/crud/client/Quote/Catalogue/QuoteParagraphProduct/updateQuoteParagraphProductDetail/', rechercheClient.updateQuoteParaProdDetail);
+
+    app.get('/crud/client/Quote/Catalogue/QuoteParagraphProductDetail/fetchValuesFromQPPDByQuotePPId/:selectedQuotPPId', rechercheClient.fetchValuesFromQPPDByQuotePPId);
 }

@@ -7,6 +7,8 @@ angular.module('QuotationApp.masters').controller('clientQuoteCatalogueControlle
     $scope.filteredItemList=[];
     $scope.componentsItemList=[];
 
+    console.dir('selected quote Paragraph id is : ' + $scope.selectedQuoteParagraphId);
+
 //    fetch categories
     $http.get('crud/client/Quote/Catalogue/Category/'+$scope.selectedDevisType).success(function (data) {
         console.log('category list : ');
@@ -159,21 +161,115 @@ angular.module('QuotationApp.masters').controller('clientQuoteCatalogueControlle
     }
 
     $scope.registerCatalogueQuant=function(selectedItem, quantity){
-        console.dir(selectedItem);
-        console.log('Catalogue Quantity is : '+ quantity);
 
-        $http.get('crud/client/Quote/Catalogue/Items/fetchInstallComponentItems/'+selectedItem.usual_code).success(function(data){
-            console.log('fetched install item is : ');
-            console.dir(data[0]);
-            $scope.catalogueItemsList=[];
-            $scope.catalogueItemsList.push(selectedItem);
-            $scope.catalogueItemsList.push(data[0]);
-            console.log('catalogue item list in catalogue is :');
-            console.dir($scope.catalogueItemsList);
+        var quotePP={
+            selectedQuoteParagraphId:$scope.selectedQuoteParagraphId,
+            itemId:selectedItem.id,
+            quantityT: quantity,
+            quantityA: quantity,
+            quantityR: 0,
+            statusFlag:1
+        }
 
-            $scope.modalShown = !$scope.modalShown;
+        /*------ get QuotationParagraphProduct by item-id and QuotationParagraph-id---- */
+        $http.get('crud/client/Quote/Catalogue/getQPPByItemIdAndQPId/'+$scope.selectedQuoteParagraphId+'/'+selectedItem.id).success(function(data){
+            console.log('fetched QPP Data is : ');
+            console.dir(data);
 
-            $rootScope.$broadcast('catalogueSelectedList', $scope.catalogueItemsList, quantity);
+            if(data.length == 0) {// add new quoteParagraphProduct
+
+                $http.post('crud/client/Quote/Catalogue/saveQuoteParagraphProduct/', quotePP).success(function (data) {
+
+                    for (var i = 0; i < data[0].Quantity_Total; i++) {
+                        var quotePPD = {
+                            selectedQuoteParaProdId: data[0].QuotationParagraphProduct_id,
+                            building: '',
+                            floor: '',
+                            location: '',
+                            install: 1,
+                            recycle: 0,
+                            isReplacement: 0,
+                            statusFlag: 0
+                        }
+
+                        $http.post('crud/client/Quote/Catalogue/QuoteParagraphProduct/saveQuoteParagraphProductDetail/', quotePPD).success(function (data) {
+                            console.log('QPPD also saved');
+                        });
+
+                    }
+
+                    $http.get('crud/client/Quote/Catalogue/Items/fetchInstallComponentItems/' + selectedItem.usual_code).success(function (data) {
+
+                        quotePP.itemId = data[0].id;
+                        quotePP.statusFlag = 0;
+
+                        $http.get('crud/client/Quote/Catalogue/getQPPByItemIdAndQPId/'+$scope.selectedQuoteParagraphId+'/'+quotePP.itemId).success(function(QPPdata){
+
+                            if(QPPdata.length == 0){
+
+                                $http.post('crud/client/Quote/Catalogue/saveQuoteParagraphProduct/', quotePP).success(function (data) {
+                                    console.log('well done install item saved in QPP');
+                                    $scope.modalShown = !$scope.modalShown;
+                                    $rootScope.$broadcast('reinitPanierAfterAddCatalogue');
+                                });
+                            }else{
+
+                                quotePP.quantityT=parseInt(quotePP.quantityT)+parseInt(QPPdata[0].Quantity_Total);
+                                quotePP.quantityA=parseInt(quotePP.quantityA)+parseInt(QPPdata[0].Quantity_Additional);
+                                quotePP.quantityR=parseInt(quotePP.quantityR)+parseInt(QPPdata[0].Quantity_Replaced);
+
+                                $http.post('crud/client/Quote/Catalogue/updateQuoteParagraphProduct/', quotePP).success(function (data) {
+                                    console.log('well done install item updated in QPP');
+                                    $scope.modalShown = !$scope.modalShown;
+                                    $rootScope.$broadcast('reinitPanierAfterAddCatalogue');
+                                });
+                            }
+                        })
+
+                    });
+
+                });
+            }
+            else{ // update existing quoteParagraphProduct
+
+                quotePP.quantityT=parseInt(quotePP.quantityT)+parseInt(data[0].Quantity_Total);
+                quotePP.quantityA=parseInt(quotePP.quantityA)+parseInt(data[0].Quantity_Additional);
+                quotePP.quantityR=parseInt(quotePP.quantityR)+parseInt(data[0].Quantity_Replaced);
+
+                $http.post('crud/client/Quote/Catalogue/updateQuoteParagraphProduct/', quotePP).success(function(data){
+
+                    for (var i = 0; i < quantity; i++) {
+                        var quotePPD = {
+                            selectedQuoteParaProdId: data[0].QuotationParagraphProduct_id,
+                            building: '',
+                            floor: '',
+                            location: '',
+                            install: 1,
+                            recycle: 0,
+                            isReplacement: 0,
+                            statusFlag: 0
+                        }
+
+                        $http.post('crud/client/Quote/Catalogue/QuoteParagraphProduct/saveQuoteParagraphProductDetail/', quotePPD).success(function (data) {
+                            console.log('QPPD also saved');
+                        });
+
+                    }
+
+                    $http.get('crud/client/Quote/Catalogue/Items/fetchInstallComponentItems/' + selectedItem.usual_code).success(function (data) {
+
+                        quotePP.itemId = data[0].id;
+                        quotePP.statusFlag = 0;
+
+                        $http.post('crud/client/Quote/Catalogue/updateQuoteParagraphProduct/', quotePP).success(function (data) {
+                            console.log('well done install item updated in QPP');
+                            $scope.modalShown = !$scope.modalShown;
+                            $rootScope.$broadcast('reinitPanierAfterAddCatalogue');
+                        });
+                    });
+
+                });
+            }
 
         });
     }

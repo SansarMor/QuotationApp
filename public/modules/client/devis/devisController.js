@@ -39,6 +39,13 @@ angular.module('QuotationApp.masters').controller('clientDevisController',['$sco
         $scope.devisTypeList=data;
     });
 
+    $http.get('crud/client/Quote/Catalogue/allItems/').success(function (data) {
+        $scope.allItemsList=data;
+    });
+
+    $http.get('crud/client/Quote/paragraph/allQuoteParaProduct/').success(function(data) {
+        $scope.allQuoteParaProduct = data;
+    });
 
     $scope.addDevis=function(){
         $scope.devisListDiv=false;
@@ -72,15 +79,12 @@ angular.module('QuotationApp.masters').controller('clientDevisController',['$sco
     };
 
     $scope.registerDevis=function(){
-        console.log('inside register devis function');
+
         $scope.devisListDiv=false;
         $scope.addDevisDiv=false;
 
         $scope.devisParams.customer_id=$scope.clientDetails.id;
         $scope.devisParams.devisType=$scope.selectedDevisType;
-
-        console.log('devis type is : '+$scope.devisParams.devisType);
-        console.log('customer id is : '+ $scope.devisParams.customer_id);
 
         $http.get('crud/client/saveDevis/'+$scope.devisParams.customer_id+'/'+$scope.devisParams.devisType).success(function(data){
 
