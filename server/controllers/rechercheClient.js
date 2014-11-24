@@ -5,8 +5,6 @@
  */
 var mssql=require('./mssql');
 
-/*Load all client list*/
-
 var reqData='';
 
 exports.createDatabaseConnection=function(req, res){
@@ -24,6 +22,15 @@ exports.all = function(req, res) {
     });
 
 };
+
+exports.getAllClientQuotes=function(req, res){
+
+    var sqlQuery='select * from Quotation where Customer_id='+req.params.clientId;
+    new mssql.SqlConnection(reqData, sqlQuery, function(data) {
+        res.jsonp(data);
+    });
+
+}
 
 /*Load client all sites*/
 exports.clientSites= function(req, res){
@@ -309,6 +316,15 @@ exports.fetchValuesFromQPPDByQuotePPId=function(req, res){
     var sqlQuery="select * from QuotationParagraphProductDetail where QuotationParagraphProduct_id="+req.params.selectedQuotPPId+"";
     new mssql.SqlConnection(reqData, sqlQuery, function(data){
         console.log('all quoteParaProductDetail list : '+data);
+        res.jsonp(data);
+    });
+}
+
+exports.getAllQuotationList=function(req, res){
+    var sqlQuery='SELECT * from Quotation';
+    console.log('req data is : ');
+    console.dir(reqData);
+    new mssql.SqlConnection(reqData, sqlQuery, function(data) {
         res.jsonp(data);
     });
 }

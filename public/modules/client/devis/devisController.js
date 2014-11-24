@@ -16,6 +16,25 @@ angular.module('QuotationApp.masters').controller('clientDevisController',['$sco
 
     $scope.clientDetails=rechercheClientService.getClientDetails();
 
+    $http.get('crud/client/devis/'+$scope.clientDetails.id).success(function(data){
+        console.log('client quotes are');
+        console.dir(data);
+        $scope.clientQuotes=data;
+    });
+
+    $scope.showSelectedClientQuoteDetails=function(clientQuote){
+        console.log('selected client quote is : ');
+        console.dir(clientQuote);
+        $scope.devisListDiv=false;
+        $scope.addDevisDiv=false;
+
+        $scope.devisParams.customer_id=$scope.clientDetails.id;
+        $scope.devisParams.devisType=$scope.selectedDevisType;
+        $scope.currentQuote=clientQuote;
+        $scope.devisPanierBodyURL='modules/client/panier/views/panier.html';
+    }
+
+
     /*Fetch site list by client Id*/
     $http.get('crud/client/sites/'+$scope.clientDetails.id).success(function(data){
         console.log('client sites are');

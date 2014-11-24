@@ -22,16 +22,16 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr data-ng-repeat="client in clientList" data-ng-mouseenter="devis.showDelete = true" data-ng-mouseleave="devis.showDelete = false">
-                    <td>12</td>
-                    <td>abc</td>
-                    <td>sdfsf</td>
-                    <td>sdfsf</td>
-                    <td>fsdfsd</td>
-                    <td>dsfdsf</td>
-                    <td>dsfdsf</td>
-                    <td>dsfdsf</td>
-                    <td><button data-ng-class="{invisible:!devis.showDelete}" type="button" class="invisible btn btn-link btn-xs" data-ng-click="delete(devis)"><span class="glyphicon glyphicon-trash"></span></button></td>
+                <tr data-ng-repeat="clientQuote in clientQuotes" ng-click="showSelectedClientQuoteDetails(clientQuote)">
+                    <td>{{index+1}}</td>
+                    <td>{{clientQuote.Status}}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><a title="Delete" ng-click="deleteClientQuote(clientQuote)" class="glyphicon glyphicon-remove-circle"></a></td>
                 </tr>
                 </tbody>
             </table>

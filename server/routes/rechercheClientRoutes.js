@@ -14,6 +14,7 @@ module.exports = function(app){
 
     app.get('/crud/clients',rechercheClient.all);
 
+    app.get('/crud/client/devis/:clientId', rechercheClient.getAllClientQuotes);
 
     app.get('/crud/client/sites/:clientId', rechercheClient.clientSites);
 
@@ -68,4 +69,5 @@ module.exports = function(app){
     app.post('/crud/client/Quote/Catalogue/QuoteParagraphProduct/updateQuoteParagraphProductDetail/', rechercheClient.updateQuoteParaProdDetail);
 
     app.get('/crud/client/Quote/Catalogue/QuoteParagraphProductDetail/fetchValuesFromQPPDByQuotePPId/:selectedQuotPPId', rechercheClient.fetchValuesFromQPPDByQuotePPId);
+
 }
