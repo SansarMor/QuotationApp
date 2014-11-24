@@ -75,12 +75,10 @@
                         <th>Code Postal</th>
                         <th>ville</th>
                         <th>SIRET</th>
-                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr data-ng-repeat="client in clientList | filter:search | filter:query">
-                    <!--<tr data-ng-repeat="client in clientList | filter:query">-->
+                    <tr data-ng-repeat="client in clientList | filter:search | filter:query" data-ng-click="clientDetails(client)" data-ui-sref="clientDetails">
                         <td>{{client.AN8}}</td>
                         <td>{{client.corporate_name}}</td>
                         <td>{{client.NomSite}}</td>
@@ -88,7 +86,6 @@
                         <td>{{client.zip_code}}</td>
                         <td>{{client.city}}</td>
                         <td>{{client.SIRET}}</td>
-                        <td><a class="glyphicon glyphicon-zoom-in" data-ng-click="clientDetails(client)" data-ui-sref="clientDetails" title="More Details"></a></td>
                     </tr>
                     </tbody>
                 </table>

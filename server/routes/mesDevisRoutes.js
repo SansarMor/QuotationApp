@@ -1,9 +1,9 @@
 "use strict"
 
 var config = require('../../config/config');
-var rechercheClient = require('../controllers/rechercheClient');
+var mesDevis = require('../controllers/mesDevis');
 
 module.exports = function(app){
 
-    app.get('/crud/mesDevisList/', rechercheClient.getAllQuotationList);
+    app.get('/crud/mesDevisList/', mesDevis.getAllQuotationList);
 }

@@ -10,11 +10,11 @@
 
         <div id="indexId" ng-show="indexId">
             <div>
-                <header class="navbar navbar-inverse navbar-static-top" data-role="navigation">
+                <header style="background-color: #604A7B" class="navbar navbar-inverse navbar-static-top" data-role="navigation" >
                     <div class="container" data-ng-include="'modules/home/views/header.html'"></div>
                 </header>
                 <div class="container-fluid">
-                    <div class="row" style="background-color: lightgrey; margin-top: -20px">
+                    <div class="row" style="background-color: lightgrey; margin-top: -20px; margin-left: 0em; margin-right: 0em">
                         <div class="span12">
                             <ul class="nav nav-tabs">
                                 <li><a data-ui-sref="tableauDeBord">Tableau de bord</a></li>
@@ -30,84 +30,112 @@
             </div>
         </div>
 
-        <div id="loginbox" ng-show="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+        <div id="loginbox" ng-show="loginbox">
 
-            <div class="panel panel-info" >
-                <div class="panel-heading">
-                    <div class="panel-title">Sign In</div>
-
-                    <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="#">Forgot password?</a></div>
+            <div class="row">
+                <div class="col-md-2 col-md-offset-10">
+                    <img width="61%" src="/img/unicom_logo_150.png" class="img-responsive">
                 </div>
+            </div>
+            <div class="row" style="background-color: #604A7B; margin-right: 0em;margin-right: 0em">
+                <div class="col-md-1 col-md-offset-4" style="margin-top: 8em">
+                    <img src="/img/logo_chubb_header.png" class="img-responsive">
+                </div>
+                <div class="col-md-1"  style="margin-top: 8em">
+                    <img src="/img/logo_sicli_header.png" class="img-responsive">
+                </div>
+                <div class="col-md-1"  style="margin-top: 8em">
+                    <img src="/img/logo_marioff_header.png" class="img-responsive">
+                </div>
+                <div class="col-md-5">
+                    <div class="panel panel-info" style="border: 0px">
+                        <div class="panel-heading" style="background-color: #604A7B">
+                            <div class="panel-title">Sign In</div>
 
-                <div style="padding-top:30px" class="panel-body" >
-
-                    <div id="login-alert" class="alert alert-danger col-sm-12" ng-show="loginAlert"> The email or password you entered is incorrect.</div>
-
-                    <form id="loginformId" name="loginForm" class="form-horizontal" role="form" ng-submit="login(credentials)">
-
-                        <div style="margin-bottom: 25px" class="input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                            <input id="login-username" type="text" class="form-control" name="username" value="" ng-model="credentials.email" placeholder="username or email" required="" autofocus="">
-
+                            <div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="#">Forgot password?</a></div>
                         </div>
 
-                        <div style="margin-bottom: 25px" class="input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                            <input id="login-password" type="password" class="form-control" name="password" ng-model="credentials.password" placeholder="password" required="">
-                        </div>
+                        <div style="padding-top:30px; background-color: #604A7B" class="panel-body">
 
+                            <div id="login-alert" class="alert alert-danger col-sm-12" ng-show="loginAlert"> The email or password you entered is incorrect.</div>
 
+                            <form id="loginformId" name="loginForm" class="form-horizontal" role="form" ng-submit="login(credentials)">
 
-                        <div class="input-group">
-                            <div class="checkbox">
-                                <label>
-                                    <input id="login-remember" type="checkbox" name="remember" value="1"> Remember me
-                                </label>
-                            </div>
-                        </div>
+                                <div style="margin-bottom: 25px" class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                    <input id="login-username" type="text" class="form-control" name="username" value="" ng-model="credentials.email" placeholder="username or email" required="" autofocus="">
 
-
-                        <div style="margin-top:10px" class="form-group">
-                            <!-- Button -->
-
-                            <div class="col-sm-12 controls">
-                                <button type="submit" class="btn btn-success">Login</button>
-                                <!-- <a id="btn-login" href="#" class="btn btn-success">Login  </a> -->
-                                <!-- <a id="btn-fblogin" href="#" class="btn btn-primary">Login with Facebook</a> -->
-
-                            </div>
-                        </div>
-
-
-                        <div class="form-group">
-                            <div class="col-md-12 control">
-                                <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" >
-                                    Don't have an account!
-                                    <a href="#" onClick="$('#loginbox').hide(); $('#signupbox').show()">
-                                        Sign Up Here
-                                    </a>
                                 </div>
-                            </div>
+
+                                <div style="margin-bottom: 25px" class="input-group">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                                    <input id="login-password" type="password" class="form-control" name="password" ng-model="credentials.password" placeholder="password" required="">
+                                </div>
+
+                                <div class="input-group">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input id="login-remember" type="checkbox" name="remember" value="1"> Remember me
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div style="margin-top:10px" class="form-group">
+
+                                    <div class="col-sm-12 controls">
+                                        <button type="submit" class="btn btn-success" style="background-color: #EC2653">Login</button>
+
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <div class="col-md-12 control">
+                                        <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" >
+                                            Don't have an account!
+                                            <a href="#" onClick="$('#loginbox').hide(); $('#signupbox').show()">
+                                                Sign Up Here
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
-                    </form>
-
-
-
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div id="signupbox" style="display:none; margin-top:50px" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+    <div id="signupbox" style="display:none">
 
         <div data-ng-controller="signUpController">
-            <div class="panel panel-info">
-                <div class="panel-heading">
+
+            <div class="row">
+                <div class="col-md-2 col-md-offset-10">
+                    <img width="61%" src="/img/unicom_logo_150.png" class="img-responsive">
+                </div>
+            </div>
+            <div class="row" style="background-color: #604A7B">
+                <div class="col-md-1 col-md-offset-4" style="margin-top: 8em">
+                    <img src="/img/logo_chubb_header.png" class="img-responsive">
+                </div>
+                <div class="col-md-1"  style="margin-top: 8em">
+                    <img src="/img/logo_sicli_header.png" class="img-responsive">
+                </div>
+                <div class="col-md-1"  style="margin-top: 8em">
+                    <img src="/img/logo_marioff_header.png" class="img-responsive">
+                </div>
+                <div class="col-md-5">
+
+
+            <div class="panel panel-info" style="border: 0px">
+                <div class="panel-heading" style="background-color: #604A7B">
                     <div class="panel-title">Sign Up</div>
 
                     <div style="float:right; font-size: 85%; position: relative; top:-10px">Already have an account ? <a id="signinlink" href="#" onclick="$('#signupbox').hide(); $('#loginbox').show()">Sign In here</a></div>
                 </div>
-                <div class="panel-body" >
+                <div class="panel-body" style="background-color: #604A7B">
                     <form id="signupformId" name="signupform" class="form-horizontal" role="form" ng-submit=signup(userInfo)>
 
                         <div id="signupalert" class="alert alert-success" ng-show="signupalert">
@@ -150,7 +178,7 @@
                         <div class="form-group">
                             <!-- Button -->
                             <div class="col-md-offset-3 col-md-9">
-                                <button type="submit" class="btn btn-success">&nbsp Sign Up</button>
+                                <button type="submit" class="btn btn-success" style="background-color: #EC2653">&nbsp Sign Up</button>
                                 <!-- <button id="btn-signup" type="button" class="btn btn-info"><i class="icon-hand-right"></i> &nbsp Sign Up</button> -->
                                 <span style="margin-left:8px;"></span>
                             </div>
@@ -169,6 +197,8 @@
                     </form>
                 </div>
             </div>
+            </div>
+        </div>
 
         </div>
 

@@ -39,20 +39,21 @@ exports.SqlConnection = function(sqlQuery, callback) {
 
 	});
 }*/
-
+var connectionRequest='';
 
 exports.getSqlConnection = function(callback) {
 
     mssql.connect(connectionConfig, function(err_connect) {
 
     var request = new mssql.Request();
+        connectionRequest=request;
     callback(request);
     });
 }
 
-exports.SqlConnection=function(request, sqlQuery, callback){
+exports.SqlConnection=function(sqlQuery, callback){
 
-    request.query(sqlQuery, function(err_query, recordset) {
+    connectionRequest.query(sqlQuery, function(err_query, recordset) {
 
         callback(recordset);
     });
