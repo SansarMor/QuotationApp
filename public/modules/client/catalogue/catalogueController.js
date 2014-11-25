@@ -213,12 +213,12 @@ angular.module('QuotationApp.masters').controller('clientQuoteCatalogueControlle
                                     $rootScope.$broadcast('reinitPanierAfterAddCatalogue');
                                 });
                             }else{
+                                var quotePP1= angular.copy(quotePP);
+                                quotePP1.quantityT=parseInt(quotePP1.quantityT)+parseInt(QPPdata[0].Quantity_Total);
+                                quotePP1.quantityA=parseInt(quotePP1.quantityA)+parseInt(QPPdata[0].Quantity_Additional);
+                                quotePP1.quantityR=parseInt(quotePP1.quantityR)+parseInt(QPPdata[0].Quantity_Replaced);
 
-                                quotePP.quantityT=parseInt(quotePP.quantityT)+parseInt(QPPdata[0].Quantity_Total);
-                                quotePP.quantityA=parseInt(quotePP.quantityA)+parseInt(QPPdata[0].Quantity_Additional);
-                                quotePP.quantityR=parseInt(quotePP.quantityR)+parseInt(QPPdata[0].Quantity_Replaced);
-
-                                $http.post('crud/client/Quote/Catalogue/updateQuoteParagraphProduct/', quotePP).success(function (data) {
+                                $http.post('crud/client/Quote/Catalogue/updateQuoteParagraphProduct/', quotePP1).success(function (data) {
                                     console.log('well done install item updated in QPP');
                                     $scope.modalShown = !$scope.modalShown;
                                     $rootScope.$broadcast('reinitPanierAfterAddCatalogue');
@@ -231,12 +231,12 @@ angular.module('QuotationApp.masters').controller('clientQuoteCatalogueControlle
                 });
             }
             else{ // update existing quoteParagraphProduct
+                var quotePP1= angular.copy(quotePP);
+                quotePP1.quantityT=parseInt(quotePP1.quantityT)+parseInt(data[0].Quantity_Total);
+                quotePP1.quantityA=parseInt(quotePP1.quantityA)+parseInt(data[0].Quantity_Additional);
+                quotePP1.quantityR=parseInt(quotePP1.quantityR)+parseInt(data[0].Quantity_Replaced);
 
-                quotePP.quantityT=parseInt(quotePP.quantityT)+parseInt(data[0].Quantity_Total);
-                quotePP.quantityA=parseInt(quotePP.quantityA)+parseInt(data[0].Quantity_Additional);
-                quotePP.quantityR=parseInt(quotePP.quantityR)+parseInt(data[0].Quantity_Replaced);
-
-                $http.post('crud/client/Quote/Catalogue/updateQuoteParagraphProduct/', quotePP).success(function(data){
+                $http.post('crud/client/Quote/Catalogue/updateQuoteParagraphProduct/', quotePP1).success(function(data){
 
                     for (var i = 0; i < quantity; i++) {
                         var quotePPD = {
@@ -260,12 +260,28 @@ angular.module('QuotationApp.masters').controller('clientQuoteCatalogueControlle
 
                         quotePP.itemId = data[0].id;
                         quotePP.statusFlag = 0;
+                        $http.get('crud/client/Quote/Catalogue/getQPPByItemIdAndQPId/'+$scope.selectedQuoteParagraphId+'/'+quotePP.itemId).success(function(QPPdata){
 
-                        $http.post('crud/client/Quote/Catalogue/updateQuoteParagraphProduct/', quotePP).success(function (data) {
-                            console.log('well done install item updated in QPP');
-                            $scope.modalShown = !$scope.modalShown;
-                            $rootScope.$broadcast('reinitPanierAfterAddCatalogue');
-                        });
+                            if(QPPdata.length == 0){
+
+                                $http.post('crud/client/Quote/Catalogue/saveQuoteParagraphProduct/', quotePP).success(function (data) {
+                                    console.log('well done install item saved in QPP');
+                                    $scope.modalShown = !$scope.modalShown;
+                                    $rootScope.$broadcast('reinitPanierAfterAddCatalogue');
+                                });
+                            }else{
+                                var quotePP1= angular.copy(quotePP);
+                                quotePP1.quantityT=parseInt(quotePP1.quantityT)+parseInt(QPPdata[0].Quantity_Total);
+                                quotePP1.quantityA=parseInt(quotePP1.quantityA)+parseInt(QPPdata[0].Quantity_Additional);
+                                quotePP1.quantityR=parseInt(quotePP1.quantityR)+parseInt(QPPdata[0].Quantity_Replaced);
+
+                                $http.post('crud/client/Quote/Catalogue/updateQuoteParagraphProduct/', quotePP1).success(function (data) {
+                                    console.log('well done install item updated in QPP');
+                                    $scope.modalShown = !$scope.modalShown;
+                                    $rootScope.$broadcast('reinitPanierAfterAddCatalogue');
+                                });
+                            }
+                        })
                     });
 
                 });

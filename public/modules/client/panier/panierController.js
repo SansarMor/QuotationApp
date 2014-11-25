@@ -186,7 +186,7 @@ angular.module('QuotationApp.masters').controller('ClientPanierController',['$ro
         $scope.quoteRecycleCatalogueBodyURL='modules/client/recyCatalogue/views/recyCatalogue.html';
     }
 
-    $rootScope.$on('catalogueRecyItemsSelectedList', function(event, selectedRecyItemsList) {
+    $rootScope.$on('catalogueRecyItemsSelectedList', function(event) {
 
         console.log('welcome back');
         $scope.quoteRecycleCatalogueBodyURL='';
