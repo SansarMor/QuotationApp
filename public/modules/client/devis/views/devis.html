@@ -1,5 +1,5 @@
 <div data-ng-controller="clientDevisController">
-    <div ng-show="devisListDiv">
+    <div ng-show="devisListDiv" ng-init="initializeQuote()">
 
         <div class="btn-group" style="margin-top: 1em; margin-bottom: 1em; margin-left: 1em">
             <button type="button" class="btn btn-default glyphicon glyphicon-plus-sign" data-ng-click="addDevis()"> Ajouter Devis</button>

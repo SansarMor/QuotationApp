@@ -135,6 +135,34 @@ exports.fetchPanier=function(req, res){
     });
 }
 
+exports.deleteQuoteParagraph=function(req, res){
+
+    var sqlQuery="delete from QuotationParagraph where QuotationParagraph_id=" + req.params.selectedQuotePara;
+    new mssql.SqlConnection(sqlQuery, function(data) {
+
+        var sqlQuery1 = "select * from QuotationParagraphProduct where QuotationParagraph_id=" + req.params.selectedQuotePara;
+        new mssql.SqlConnection(sqlQuery1, function (quotePPDataList) {
+            var i=0;
+            quotePPDataList.forEach(function (quotePPData, index) {
+
+                var sqlQuery2 = "delete from QuotationParagraphProductDetail where QuotationParagraphProduct_id=" + quotePPData.QuotationParagraphProduct_id;
+                new mssql.SqlConnection(sqlQuery2, function (data) {
+                    var sqlQuery3 = "delete from QuotationParagraphProduct where QuotationParagraphProduct_id=" + quotePPData.QuotationParagraphProduct_id;
+                    new mssql.SqlConnection(sqlQuery3, function (data) {
+                        if(i+1==quotePPDataList.length) {
+                            res.send('Data deleted successfully');
+                        }else{
+                            i++;
+                        }
+                    })
+                });
+
+            });
+        });
+
+    });
+}
+
 exports.getCategories=function(req, res){
     var activeChapter=req.params.selectedDevisType;
     var sqlQuery="select * from UDC where SY='41' and RT='10' and KY in (select distinct family from Item_Family_Hierarchy where sub_family in (select activity from Chapter where name ='"+activeChapter+"') and family_level= 'SRP0')";
@@ -273,6 +301,18 @@ exports.updateQuotationParagraphProduct=function(req, res){
         });
     });
 }
+
+exports.deleteQuoteParaProduct=function(req, res){
+
+    var sqlQuery="delete from QuotationParagraphProductDetail where QuotationParagraphProduct_id="+req.params.selectedQPPId;
+    new mssql.SqlConnection(sqlQuery, function(data){
+        var sqlQuery2="delete from QuotationParagraphProduct where QuotationParagraphProduct_id="+req.params.selectedQPPId;
+        new mssql.SqlConnection(sqlQuery2, function(data){
+          res.send('Data deleted successfully');
+        })
+    });
+}
+
 
 exports.getAllQuoteParaProducts=function(req, res){
 

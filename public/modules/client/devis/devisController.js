@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('QuotationApp.masters').controller('clientDevisController',['$scope','$http','rechercheClientService', function($scope, $http, rechercheClientService){
+angular.module('QuotationApp.masters').controller('clientDevisController',['$rootScope','$scope','$http','rechercheClientService', function($rootScope, $scope, $http, rechercheClientService){
 
     console.log('inside devis controller');
 
@@ -16,14 +16,17 @@ angular.module('QuotationApp.masters').controller('clientDevisController',['$sco
 
     $scope.clientDetails=rechercheClientService.getClientDetails();
 
-    $http.get('crud/client/devis/'+$scope.clientDetails.id).success(function(data){
-        console.log('client quotes are');
-        console.dir(data);
-        $scope.clientQuotes=data;
-    });
+    $scope.initializeQuote=function() {
+        $http.get('crud/client/devis/' + $scope.clientDetails.id).success(function (data) {
+            console.log('client quotes are');
+            console.dir(data);
+            $scope.clientQuotes = data;
+        });
+    }
 
     $scope.showSelectedClientQuoteDetails=function(clientQuote){
         console.log('selected client quote is : ');
+        $scope.selectedDevisType='SICLI001';
         console.dir(clientQuote);
         $scope.devisListDiv=false;
         $scope.addDevisDiv=false;
@@ -122,5 +125,12 @@ angular.module('QuotationApp.masters').controller('clientDevisController',['$sco
 
         });
     }
+
+    $rootScope.$on('backToDevis', function(event){
+        $scope.devisListDiv=true;
+        $scope.addDevisDiv=false;
+        $scope.devisPanierBodyURL='';
+        $scope.initializeQuote();
+    });
 
 }]);

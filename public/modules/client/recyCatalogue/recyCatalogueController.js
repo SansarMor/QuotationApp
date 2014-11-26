@@ -61,4 +61,8 @@ angular.module('QuotationApp.masters').controller('clientQuoteRecyCatalogueContr
         $scope.abcd=clientQuoteRecyCatalogueService.saveRecySelectedItems($scope.selectedRecyItemsList,$scope.selectedQuoteParagraphId, $scope.allItemsList);
     }
 
+    $scope.backToPanier=function(){
+        $rootScope.$broadcast('backToPanier');
+    }
+
 }]);

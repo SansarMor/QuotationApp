@@ -290,4 +290,8 @@ angular.module('QuotationApp.masters').controller('clientQuoteCatalogueControlle
         });
     }
 
+    $scope.backToPanier=function(){
+        $rootScope.$broadcast('backToPanier');
+    }
+
 }]);

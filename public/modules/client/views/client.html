@@ -17,15 +17,14 @@
         </div>
     </div>
 
-    <div class="row" style="background-color: transparent; margin-left: 0em;margin-right: 0em">
+    <div class="row" style="background-color: transparent; margin-left: 0em; margin-right: 0em">
         <div class="span12">
-            <ul class="nav nav-tabs">
-                <li data-ng-repeat="userMenu in userMenus" data-ui-sref-active="active">
-                    <a onclick="myfunction()" ng-click="showClientSection(userMenu)">{{userMenu.title}}</a>
-                </li>
+            <ul class="nav nav-tabs" >
+                    <li data-ng-repeat="userMenu in userMenus" >
+                        <a onclick="myfunction()" ng-click="showClientSection(userMenu)">{{userMenu.title}}</a>
+                    </li>
             </ul>
         </div>
-
     </div>
 
     <p ng-include="clientBodyURL"></p>

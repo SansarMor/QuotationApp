@@ -32,6 +32,8 @@ module.exports = function(app){
 
     app.get('/crud/client/Quote/Panier/:selectedQuote', rechercheClient.fetchPanier);
 
+    app.get('/crud/client/Quote/deleteQuoteParagraph/:selectedQuotePara', rechercheClient.deleteQuoteParagraph);
+
     app.post('/crud/client/Quote/updateQuoteParaDescription/:quoteParaId/:quoteParaDesc', rechercheClient.updateQuoteParaDescription);
 
     app.get('/crud/client/Quote/Catalogue/Category/:selectedDevisType', rechercheClient.getCategories);
@@ -61,6 +63,8 @@ module.exports = function(app){
     app.post('/crud/client/Quote/Catalogue/saveQuoteParagraphProduct/', rechercheClient.saveQuotationParagraphProduct);
 
     app.post('/crud/client/Quote/Catalogue/updateQuoteParagraphProduct/', rechercheClient.updateQuotationParagraphProduct);
+
+    app.get('/crud/client/Quote/deleteQuoteParaProduct/:selectedQPPId', rechercheClient.deleteQuoteParaProduct);
 
     app.get('/crud/client/Quote/paragraph/allQuoteParaProduct/', rechercheClient.getAllQuoteParaProducts);
 

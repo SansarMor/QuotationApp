@@ -1,8 +1,13 @@
 <div data-ng-controller="clientQuoteCatalogueController">
 
     <div class="row">
-        <div class="col-md-3">
+        <div class="col-md-3" style="margin-top: 1em;font-size: large">
             <b style="margin-left: 1em">Catalogue</b>
+        </div>
+        <div class="col-md-1">
+            <div class="btn-group" style="margin-top: 1em; margin-bottom: 1em; margin-left: 1em">
+                <button type="button" class="btn btn-default glyphicon" data-ng-click="backToPanier()"> Panier</button>
+            </div>
         </div>
 
     </div>
@@ -22,7 +27,7 @@
                     <input class="form-control" type="text" ng-model="catalogueQuant">
                 </div>
                 <button class=" btn btn-default" ng-click="cancelCatalogueQuant()">annuler</button>
-                <button ng-click="registerCatalogueQuant(selectedItem, catalogueQuant)" class="btn btn-default">enregister</button>
+                <button style="background-color: #EC2653; color: #ffffff" ng-click="registerCatalogueQuant(selectedItem, catalogueQuant)" class="btn btn-default">enregister</button>
             </div>
         </div>
 
@@ -38,7 +43,7 @@
                     <input id="codeArtId" type="text" class="form-control" placeholder="">
                 </div>
                 <div class="col-md-1 col-lg-offset-5" ng-show="showMainItemTagDiv">
-                    <a ng-click="showAllFilterdItems()" class="glyphicon glyphicon-tags"></a>
+                    <a ng-click="showAllFilterdItems()"><img width="37%" src="/img/rounded_assosiatedproduct_b_30.png" class="img-responsive"></a>
                 </div>
             </div>
             <div class="row">
@@ -118,8 +123,8 @@
                         <td>{{item.usual_code}}</td>
                         <td>{{item.description_1}}</td>
                         <td></td>
-                        <td><a ng-click="fetchComponentItems(item)" class="glyphicon glyphicon-tags"></a></td>
-                        <td><a title="Ajouter du catalogue" ng-click="addItemToCart(item)" class="glyphicon glyphicon-plus-sign"></a></td>
+                        <td><a ng-click="fetchComponentItems(item)"></a><img width="30%" src="/img/assosiatedproduct_b_30.png" class="img-responsive"></td>
+                        <td><a title="Ajouter du catalogue" ng-click="addItemToCart(item)"><img width="30%" src="/img/cart_b_30.png" class="img-responsive"></a></td>
 
                     </tr>
                     </tbody>

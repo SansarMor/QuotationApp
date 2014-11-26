@@ -1,7 +1,12 @@
 <div data-ng-controller="clientQuoteRecyCatalogueController">
 
     <div class="row margin-top-1">
-        <div class="col-lg-offset-5 col-lg-6">
+        <div class="col-lg-1 col-lg-offset-1">
+            <div class="btn-group" style="margin-bottom: 1em; margin-left: 1em">
+                <button type="button" class="btn btn-default glyphicon" data-ng-click="backToPanier()"> Panier</button>
+            </div>
+        </div>
+        <div class="col-lg-offset-3 col-lg-6">
             filter par
 
             <div class="btn-group" style="margin-left: 1em">
@@ -74,7 +79,7 @@
                         <td>{{actualRecyItem.recyItem.FBDUMSDJ}}</td>
                         <td></td>
                         <td>{{actualRecyItem.recyItem.U74SCDV}}</td>
-                        <td><a ng-click="fetchComponentItems(actualRecyItem)" class="glyphicon glyphicon-tags"></a></td>
+                        <td><a ng-click="fetchComponentItems(actualRecyItem)"><img width="55%" src="/img/assosiatedproduct_b_30.png" class="img-responsive"></a></td>
                     </tr>
                 </tbody>
             </table>

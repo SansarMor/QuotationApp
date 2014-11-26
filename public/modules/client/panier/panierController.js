@@ -7,39 +7,38 @@ angular.module('QuotationApp.masters').controller('ClientPanierController',['$ro
     $scope.initFunction=function(){
 
         console.log('inside init function');
-        $http.get('crud/client/Quote/Panier/' + $scope.currentQuote.Quotation_id).success(function (data) {
-            console.log('list of paragraphs :- '); console.dir(data);
+        $http.get('crud/client/Quote/Panier/' + $scope.currentQuote.Quotation_id).success(function (panierData) {
+            console.log('list of paragraphs :- '); console.dir(panierData);
             $scope.actualPanierList=[];
 
-            $scope.panierList=data;
-            $scope.panierList.forEach(function(panier, index){
+            $scope.panierList=panierData;
+            $http.get('crud/client/Quote/paragraph/allQuoteParaProduct/').success(function(data) {
+                $scope.fetchedCatalogueList = [];
+                $scope.allQuoteParaProduct = data;
+                $scope.panierList.forEach(function (panier, index) {
 
-                $scope.actualPanier={
-                    panier: panier,
-                    Site_name: '',
-                    SubSite_name:'',
-                    catalogueList:''
-                };
+                    $scope.actualPanier = {
+                        panier: panier,
+                        Site_name: '',
+                        SubSite_name: '',
+                        catalogueList: ''
+                    };
 
 
-                $http.get('crud/client/Quote/paragraph/allQuoteParaProduct/').success(function(data) {
-                    $scope.fetchedCatalogueList=[];
-                    $scope.allQuoteParaProduct = data;
+                    $scope.allQuoteParaProduct.forEach(function (quoteParaProduct, index) {
 
-                    $scope.allQuoteParaProduct.forEach(function(quoteParaProduct, index){
-
-                        var itemInQuotePara={
-                            quoteParaProd:'',
-                            item:''
+                        var itemInQuotePara = {
+                            quoteParaProd: '',
+                            item: ''
                         }
 
-                        if(panier.QuotationParagraph_id==quoteParaProduct.QuotationParagraph_id){
+                        if (panier.QuotationParagraph_id == quoteParaProduct.QuotationParagraph_id) {
 
-                            itemInQuotePara.quoteParaProd=quoteParaProduct;
-                            $scope.allItemsList.forEach(function(item,index){
+                            itemInQuotePara.quoteParaProd = quoteParaProduct;
+                            $scope.allItemsList.forEach(function (item, index) {
 
-                                if(quoteParaProduct.Item_id==item.id){
-                                    itemInQuotePara.item=item;
+                                if (quoteParaProduct.Item_id == item.id) {
+                                    itemInQuotePara.item = item;
                                     $scope.fetchedCatalogueList.push(itemInQuotePara);
                                 }
                             });
@@ -47,24 +46,25 @@ angular.module('QuotationApp.masters').controller('ClientPanierController',['$ro
                         }
                     });
 
-                    $scope.clientSites.forEach(function(clientSite,index){
-                        if(clientSite.id == panier.Site_id){
-                            $scope.actualPanier.Site_name=clientSite.MLNM;
+                    $scope.clientSites.forEach(function (clientSite, index) {
+                        if (clientSite.id == panier.Site_id) {
+                            $scope.actualPanier.Site_name = clientSite.MLNM;
                         }
                     });
-                    $scope.clientSubSites.forEach(function(clientSubSite,index){
-                        if(clientSubSite.id == panier.SubSite_id){
-                            $scope.actualPanier.SubSite_name=clientSubSite.MLNM;
+                    $scope.clientSubSites.forEach(function (clientSubSite, index) {
+                        if (clientSubSite.id == panier.SubSite_id) {
+                            $scope.actualPanier.SubSite_name = clientSubSite.MLNM;
                         }
                     });
 
-                    $scope.actualPanier.catalogueList=$scope.fetchedCatalogueList;
+                    $scope.actualPanier.catalogueList = $scope.fetchedCatalogueList;
                     $scope.actualPanierList.push($scope.actualPanier);
-                });
+                    console.log('after pushing data value of panier list is : ');
+                    console.dir($scope.actualPanierList);
+                    /*});*/
 
+                });
             });
-            console.log('panier list should be : ');
-            console.dir($scope.actualPanierList);
         });
     };
 
@@ -176,6 +176,17 @@ angular.module('QuotationApp.masters').controller('ClientPanierController',['$ro
 
     });
 
+    $rootScope.$on('backToPanier', function(event){
+        $scope.quoteCatalogueBodyURL='';
+        $scope.quoteRecycleCatalogueBodyURL='';
+        $scope.divAddParagraph=false;
+        $scope.divPanier=true;
+        $scope.catalogueIncludeDiv=false;
+        $scope.recycleCatIncludeDiv=false;
+        $scope.editCatIncludeDiv=false;
+        $scope.initFunction();
+    });
+
     $scope.ajouterRecycle=function(actualPanier){
 
         $scope.selectedQuoteParagraphId=actualPanier.panier.QuotationParagraph_id;
@@ -221,6 +232,23 @@ angular.module('QuotationApp.masters').controller('ClientPanierController',['$ro
         $scope.catalogueIncludeDiv=false;
         $scope.recycleCatIncludeDiv=false;
         $scope.editCatIncludeDiv=false;
-    })
+    });
+
+    $scope.deleteQuoteCatalogue=function(catalogueSelectedItem){
+        $http.get('crud/client/Quote/deleteQuoteParaProduct/'+catalogueSelectedItem.quoteParaProd.QuotationParagraphProduct_id).success(function(data){
+            $scope.initFunction();
+        });
+    }
+
+    $scope.deleteQuoteParagraph=function(actualPanier){
+        console.log(actualPanier.panier.QuotationParagraph_id);
+        $http.get('crud/client/Quote/deleteQuoteParagraph/'+actualPanier.panier.QuotationParagraph_id).success(function(data){
+            $scope.initFunction();
+        })
+    }
+
+    $scope.backToDevis=function(){
+        $rootScope.$broadcast('backToDevis');
+    }
 
 }]);
