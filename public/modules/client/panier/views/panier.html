@@ -2,13 +2,17 @@
 
 
     <div ng-show="divPanier" ng-init="initFunction()">
-        <b style="margin-left: 1em;background-color: #604A7B; font-size: large; color: white;">Panier</b>
+
+        <div class="btn-group" style="margin-top: 1em; margin-bottom: 1em; margin-left: 1em">
+            <a ng-click="backToDevis()"><img width="40%" src="/img/cs_arrow_back_black.png" class="img-responsive"></a>
+        </div>
+        <b style="font-size: x-large;">Panier</b>
         <div class="btn-group" style="margin-top: 1em; margin-bottom: 1em; margin-left: 1em">
             <button type="button" class="btn btn-default glyphicon glyphicon-plus-sign" data-ng-click="addParagraph()"> Ajouter Paragraphe</button>
         </div>
-        <div class="btn-group" style="margin-top: 1em; margin-bottom: 1em; margin-left: 1em">
+       <!-- <div class="btn-group" style="margin-top: 1em; margin-bottom: 1em; margin-left: 1em">
             <button type="button" class="btn btn-default glyphicon" data-ng-click="backToDevis()"> Devis</button>
-        </div>
+        </div>-->
 
         <modal-dialog show='editQuoteParagraph' width='50%' height='35%'>
 

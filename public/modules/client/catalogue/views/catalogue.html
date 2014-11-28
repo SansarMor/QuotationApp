@@ -1,13 +1,16 @@
 <div data-ng-controller="clientQuoteCatalogueController">
 
     <div class="row">
-        <div class="col-md-3" style="margin-top: 1em;font-size: large">
-            <b style="margin-left: 1em">Catalogue</b>
-        </div>
         <div class="col-md-1">
-            <div class="btn-group" style="margin-top: 1em; margin-bottom: 1em; margin-left: 1em">
+            <!--<div class="btn-group" style="margin-top: 1em; margin-bottom: 1em; margin-left: 1em">
                 <button type="button" class="btn btn-default glyphicon" data-ng-click="backToPanier()"> Panier</button>
+            </div>-->
+            <div class="btn-group" style="margin-left: 1em; margin-top: 1em">
+                <a ng-click="backToPanier()"><img width="40%" src="/img/cs_arrow_back_black.png" class="img-responsive"></a>
             </div>
+        </div>
+        <div class="col-md-1" style="margin-top: 1em;font-size: large">
+            <b style="margin-left: 1em">Catalogue</b>
         </div>
 
     </div>

@@ -84,7 +84,11 @@ angular.module('QuotationApp.masters').controller('clientQuoteEditCatalogueContr
            }
         });
 
-        $rootScope.$broadcast('catalogueUpdatedItemsSavedList', $scope.selectedEditCatalogueItem);
+        $rootScope.$broadcast('catalogueUpdatedItemsSavedList');
+    }
+
+    $scope.backToPanier=function(){
+        $rootScope.$broadcast('catalogueUpdatedItemsSavedList');
     }
 
 }]);

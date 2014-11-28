@@ -223,7 +223,7 @@ angular.module('QuotationApp.masters').controller('ClientPanierController',['$ro
 
     }
 
-    $rootScope.$on('catalogueUpdatedItemsSavedList', function(event, selectedEditCatalogueItem){
+    $rootScope.$on('catalogueUpdatedItemsSavedList', function(event){
 
         $scope.quoteEditCatalogueBodyURL='';
         console.log('welcome back');
@@ -235,7 +235,7 @@ angular.module('QuotationApp.masters').controller('ClientPanierController',['$ro
     });
 
     $scope.deleteQuoteCatalogue=function(catalogueSelectedItem){
-        $http.get('crud/client/Quote/deleteQuoteParaProduct/'+catalogueSelectedItem.quoteParaProd.QuotationParagraphProduct_id).success(function(data){
+        $http.get('crud/client/Quote/deleteQuoteParaProduct/'+catalogueSelectedItem.quoteParaProd.QuotationParagraphProduct_id+'/'+catalogueSelectedItem.quoteParaProd.QuotationParagraph_id+'/'+catalogueSelectedItem.item.usual_code).success(function(data){
             $scope.initFunction();
         });
     }

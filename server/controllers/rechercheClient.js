@@ -304,13 +304,150 @@ exports.updateQuotationParagraphProduct=function(req, res){
 
 exports.deleteQuoteParaProduct=function(req, res){
 
-    var sqlQuery="delete from QuotationParagraphProductDetail where QuotationParagraphProduct_id="+req.params.selectedQPPId;
-    new mssql.SqlConnection(sqlQuery, function(data){
-        var sqlQuery2="delete from QuotationParagraphProduct where QuotationParagraphProduct_id="+req.params.selectedQPPId;
-        new mssql.SqlConnection(sqlQuery2, function(data){
-          res.send('Data deleted successfully');
-        })
+    var sqlQuery="select * from QuotationParagraphProduct where QuotationParagraphProduct_id="+req.params.selectedQPPId;
+    new mssql.SqlConnection(sqlQuery, function(selectedQPPItemData){
+        var selectedQPPItem=selectedQPPItemData[0];
+        var sqlQuery1="select * FROM ITEM where ITM in (select component_ITM from Item_Composition where compound_ITM = (select ITM from Item where usual_code = '"+req.params.selectedQPPItemUsualCode+"') and option_type='2')";
+        new mssql.SqlConnection(sqlQuery1, function(installItemData){
+
+            var sqlQuery2="select * from QuotationParagraphProduct where Item_id="+installItemData[0].id+" and QuotationParagraph_id="+req.params.selectedQPId;
+            new mssql.SqlConnection(sqlQuery2, function(installItemDataInQPP){
+
+                var installItemInQPP=installItemDataInQPP[0];
+                installItemInQPP.Quantity_Total=parseInt(installItemInQPP.Quantity_Total) - parseInt(selectedQPPItem.Quantity_Total);
+                installItemInQPP.Quantity_Additional=parseInt(installItemInQPP.Quantity_Additional) - parseInt(selectedQPPItem.Quantity_Additional);
+                installItemInQPP.Quantity_Replaced=parseInt(installItemInQPP.Quantity_Replaced)-parseInt(selectedQPPItem.Quantity_Replaced);
+
+                if(installItemInQPP.Quantity_Total=='0'){
+
+                    var sqlQuery3="delete from QuotationParagraphProduct where QuotationParagraphProduct_id="+installItemInQPP.QuotationParagraphProduct_id;
+                    new mssql.SqlConnection(sqlQuery3, function(installItemDataDeleted) {
+
+                        if (selectedQPPItem.Quantity_Replaced == '0') {
+
+                            var sqlQuery8 = "delete from QuotationParagraphProductDetail where QuotationParagraphProduct_id=" + req.params.selectedQPPId;
+                            new mssql.SqlConnection(sqlQuery8, function (data) {
+                                var sqlQuery9 = "delete from QuotationParagraphProduct where QuotationParagraphProduct_id=" + req.params.selectedQPPId;
+                                new mssql.SqlConnection(sqlQuery9, function (data) {
+                                    res.send('Data deleted successfully');
+                                })
+                            });
+                        }
+                        else{
+
+                        var sqlQuery4 = "select * FROM ITEM where ITM in (select component_ITM from Item_Composition where compound_ITM = (select ITM from Item where usual_code = '" + req.params.selectedQPPItemUsualCode + "') and option_type='3')";
+                        new mssql.SqlConnection(sqlQuery4, function (recycleItemData) {
+
+                            var sqlQuery5 = "select * from QuotationParagraphProduct where Item_id=" + recycleItemData[0].id + " and QuotationParagraph_id=" + req.params.selectedQPId;
+                            new mssql.SqlConnection(sqlQuery5, function (recycleItemDataInQPP) {
+
+                                var recycleItemInQPP = recycleItemDataInQPP[0];
+                                recycleItemInQPP.Quantity_Total = parseInt(recycleItemInQPP.Quantity_Total) - parseInt(selectedQPPItem.Quantity_Total);
+                                recycleItemInQPP.Quantity_Additional = parseInt(recycleItemInQPP.Quantity_Additional) - parseInt(selectedQPPItem.Quantity_Additional);
+                                recycleItemInQPP.Quantity_Replaced = parseInt(recycleItemInQPP.Quantity_Replaced) - parseInt(selectedQPPItem.Quantity_Replaced);
+
+                                if (recycleItemInQPP.Quantity_Total == 0) {
+                                    var sqlQuery6 = "delete from QuotationParagraphProduct where QuotationParagraphProduct_id=" + recycleItemInQPP.QuotationParagraphProduct_id;
+                                    new mssql.SqlConnection(sqlQuery6, function (recycleItemDataDeleted) {
+                                        var sqlQuery8 = "delete from QuotationParagraphProductDetail where QuotationParagraphProduct_id=" + req.params.selectedQPPId;
+                                        new mssql.SqlConnection(sqlQuery8, function (data) {
+                                            var sqlQuery9 = "delete from QuotationParagraphProduct where QuotationParagraphProduct_id=" + req.params.selectedQPPId;
+                                            new mssql.SqlConnection(sqlQuery9, function (data) {
+                                                res.send('Data deleted successfully');
+                                            })
+                                        });
+
+                                    });
+                                } else {
+                                    var sqlQuery7 = "update QuotationParagraphProduct SET Quantity_Total=" + recycleItemInQPP.Quantity_Total + ", Quantity_Additional=" + recycleItemInQPP.Quantity_Additional + ", Quantity_Replaced=" + recycleItemInQPP.Quantity_Replaced + " where QuotationParagraph_id=" + recycleItemInQPP.QuoteParagraph_id + " and Item_id=" + recycleItemInQPP.Item_id + "";
+                                    new mssql.SqlConnection(sqlQuery7, function (recycleItemDataUpdated) {
+
+                                        var sqlQuery8 = "delete from QuotationParagraphProductDetail where QuotationParagraphProduct_id=" + req.params.selectedQPPId;
+                                        new mssql.SqlConnection(sqlQuery8, function (data) {
+                                            var sqlQuery9 = "delete from QuotationParagraphProduct where QuotationParagraphProduct_id=" + req.params.selectedQPPId;
+                                            new mssql.SqlConnection(sqlQuery9, function (data) {
+                                                res.send('Data deleted successfully');
+                                            })
+                                        });
+
+                                    });
+
+                                }
+
+                            });
+
+                        });
+                    }
+                    });
+                }else{
+
+                    var sqlQuery3="update QuotationParagraphProduct SET Quantity_Total="+installItemInQPP.Quantity_Total+", Quantity_Additional="+installItemInQPP.Quantity_Additional+", Quantity_Replaced="+installItemInQPP.Quantity_Replaced+" where QuotationParagraph_id="+installItemInQPP.QuotationParagraph_id+" and Item_id="+installItemInQPP.Item_id+"";
+                    new mssql.SqlConnection(sqlQuery3, function(installItemDataUpdated) {
+
+                        if (selectedQPPItem.Quantity_Replaced == '0') {
+
+                            var sqlQuery8 = "delete from QuotationParagraphProductDetail where QuotationParagraphProduct_id=" + req.params.selectedQPPId;
+                            new mssql.SqlConnection(sqlQuery8, function (data) {
+                                var sqlQuery9 = "delete from QuotationParagraphProduct where QuotationParagraphProduct_id=" + req.params.selectedQPPId;
+                                new mssql.SqlConnection(sqlQuery9, function (data) {
+                                    res.send('Data deleted successfully');
+                                })
+                            });
+                        }
+                        else{
+
+                        var sqlQuery4 = "select * FROM ITEM where ITM in (select component_ITM from Item_Composition where compound_ITM = (select ITM from Item where usual_code = '" + req.params.selectedQPPItemUsualCode + "') and option_type='3')";
+                        new mssql.SqlConnection(sqlQuery4, function (recycleItemData) {
+
+                            var sqlQuery5 = "select * from QuotationParagraphProduct where Item_id=" + recycleItemData[0].id + " and QuotationParagraph_id=" + req.params.selectedQPId;
+                            new mssql.SqlConnection(sqlQuery5, function (recycleItemDataInQPP) {
+
+                                var recycleItemInQPP = recycleItemDataInQPP[0];
+                                recycleItemInQPP.Quantity_Total = parseInt(recycleItemInQPP.Quantity_Total) - parseInt(selectedQPPItem.Quantity_Total);
+                                recycleItemInQPP.Quantity_Additional = parseInt(recycleItemInQPP.Quantity_Additional) - parseInt(selectedQPPItem.Quantity_Additional);
+                                recycleItemInQPP.Quantity_Replaced = parseInt(recycleItemInQPP.Quantity_Replaced) - parseInt(selectedQPPItem.Quantity_Replaced);
+
+                                if (recycleItemInQPP.Quantity_Total == '0') {
+                                    var sqlQuery6 = "delete from QuotationParagraphProduct where QuotationParagraphProduct_id=" + recycleItemInQPP.QuotationParagraphProduct_id;
+                                    new mssql.SqlConnection(sqlQuery6, function (recycleItemDataDeleted) {
+                                        var sqlQuery8 = "delete from QuotationParagraphProductDetail where QuotationParagraphProduct_id=" + req.params.selectedQPPId;
+                                        new mssql.SqlConnection(sqlQuery8, function (data) {
+                                            var sqlQuery9 = "delete from QuotationParagraphProduct where QuotationParagraphProduct_id=" + req.params.selectedQPPId;
+                                            new mssql.SqlConnection(sqlQuery9, function (data) {
+                                                res.send('Data deleted successfully');
+                                            })
+                                        });
+
+                                    });
+                                } else {
+                                    var sqlQuery7 = "update QuotationParagraphProduct SET Quantity_Total=" + recycleItemInQPP.Quantity_Total + ", Quantity_Additional=" + recycleItemInQPP.Quantity_Additional + ", Quantity_Replaced=" + recycleItemInQPP.Quantity_Replaced + " where QuotationParagraph_id=" + recycleItemInQPP.QuotationParagraph_id + " and Item_id=" + recycleItemInQPP.Item_id + "";
+                                    new mssql.SqlConnection(sqlQuery7, function (recycleItemDataUpdated) {
+
+                                        var sqlQuery8 = "delete from QuotationParagraphProductDetail where QuotationParagraphProduct_id=" + req.params.selectedQPPId;
+                                        new mssql.SqlConnection(sqlQuery8, function (data) {
+                                            var sqlQuery9 = "delete from QuotationParagraphProduct where QuotationParagraphProduct_id=" + req.params.selectedQPPId;
+                                            new mssql.SqlConnection(sqlQuery9, function (data) {
+                                                res.send('Data deleted successfully');
+                                            })
+                                        });
+
+                                    });
+
+                                }
+
+                            });
+
+                        });
+                    }
+                    });
+
+                }
+            });
+        });
+
     });
+
+
 }
 
 
