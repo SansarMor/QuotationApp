@@ -1,0 +1,24 @@
+<div data-ng-controller="adminRolesController">
+
+    <div class="table-responsive table-border" style="margin-top: 1em">
+
+        <table class="table table-hover">
+            <thead style="background-color: #080808; color: #f8f8f8;">
+            <tr>
+                <th>Role</th>
+                <th>Description</th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-ng-repeat="role in roleList">
+                <td>{{role.Name}}</td>
+                <td>{{role.Description}}</td>
+                <td><a ng-click="showEmployeeDetails(employee)"><img width="15%" src="/img/delete_b30.png" class="img-responsive"></a></td>
+                <td><a ng-click="showEmployeeDetails(employee)"><img width="13%" src="/img/rounded_search_b_30.png" class="img-responsive"></a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -38,60 +38,81 @@
         </div>
 
     </div>
-    <div ng-show="addDevisDiv">
-        <div class="btn-group" style=" margin-top:1em; margin-bottom: 1em; margin-left: 1em">
-            <h3>Quel type de devis souhaitez vous ? </h3>
-        </div>
 
-        <form role="form" id="addDevisFormId" name="addDevisForm">
-            <div class="row margin-top-left-1">
-                <div class="btn-toolbar">
+    <modal-dialog show='addDevisDiv' width='100%' height='50%' style='background-color: #604A7B; color: #604A7B'>
 
-                    <div class="btn-group">
-
-                        <button class="btn btn-default" id="devis">   Devis *    </button>
-                        <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a data-ng-click="devisSelected('Vente Produit')" value="venteProduit">Vente Produit</a>
-                                <a data-ng-click="devisSelected('Contrat de maintenance')" value="contratDeMaintenance">Contrat de maintenance</a>
-                                <a data-ng-click="devisSelected('Etude R4')" value="etudeR4">Etude R4</a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="btn-group">
-                        <button class="btn btn-default" id="devis_type">Type de vente produit</button>
-                        <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a data-ng-click="venteProductTypeSelected('Standard')" value="standard">Standard</a>
-                                <a data-ng-click="venteProductTypeSelected('Distributeur')" value="distributeur">Distributeur</a>
-                                <a data-ng-click="venteProductTypeSelected('Installateur')" value="installateur">Installateur</a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="btn-group">
-                        <button class="btn btn-default" id="type_de_devis">Type de devis * </button>
-                        <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            <li  data-ng-repeat="devisType in devisTypeList">
-                                <a data-ng-click="devisTypeSelected(devisType)">{{devisType.name}}</a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <button class="btn btn-default" ng-click="cancelDevis()">annuler</button>
-                    <button ng-click="registerDevis()" class="btn btn-default">enregister</button>
-
+        <div class="row col-lg-offset-2 col-lg-5">
+            <div class="row">
+                <div class="btn-group" style=" margin-top:1em; margin-bottom: 1em; margin-left: 1em">
+                    <h4 style="color: #ffffff; font-family: segoeuib">Quel type de devis souhaitez-vous ? </h4>
                 </div>
             </div>
-        </form>
-    </div>
+            <div class="row">
+                <div class="btn-toolbar">
+                    <div class="row">
+                        <label style="color: #ffffff; font-family: segoeuib">Devis *</label>
+                    </div>
+                    <div class="row">
+                        <div class="btn-group">
+                            <button class="btn btn-default" id="devis">   Devis *    </button>
+                            <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a data-ng-click="devisSelected('Vente Produit')" value="venteProduit">Vente Produit</a>
+                                    <a data-ng-click="devisSelected('Contrat de maintenance')" value="contratDeMaintenance">Contrat de maintenance</a>
+                                    <a data-ng-click="devisSelected('Etude R4')" value="etudeR4">Etude R4</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                    <label style="color: #ffffff; font-family: segoeuib">Type de vente produit</label>
+                    </div>
+                    <div class="row">
+                        <div class="btn-group">
+                            <button class="btn btn-default" id="devis_type">Type de vente produit</button>
+                            <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a data-ng-click="venteProductTypeSelected('Standard')" value="standard">Standard</a>
+                                    <a data-ng-click="venteProductTypeSelected('Distributeur')" value="distributeur">Distributeur</a>
+                                    <a data-ng-click="venteProductTypeSelected('Installateur')" value="installateur">Installateur</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <label style="color: #ffffff; font-family: segoeuib">Type de devis * </label>
+                    </div>
+                    <div class="row">
+                        <div class="btn-group">
+                            <button class="btn btn-default" id="type_de_devis">Type de devis</button>
+                            <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li  data-ng-repeat="devisType in devisTypeList">
+                                    <a data-ng-click="devisTypeSelected(devisType)">{{devisType.name}}</a>
+                                </li>
+                            </ul>
+                        </div>
+                   </div>
+
+                </div>
+
+            </div>
+        </div>
+        <div class="col-lg-1 col-lg-offset-1">
+            <div class="btn-group" style="margin-left: 1em; margin-top: 1em">
+                <a ng-click="registerDevis()"><img width="50%" src="/img/cs_forward_white.png" class="img-responsive"></a>
+            </div>
+        </div>
+
+    </modal-dialog>
 
     <div>
         <p ng-include="devisPanierBodyURL"></p>

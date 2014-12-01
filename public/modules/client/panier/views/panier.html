@@ -93,62 +93,67 @@
 
     </div>
 
-    <div ng-show="divAddParagraph">
-        <div class="btn-group" style=" margin-bottom: 1em; margin-left: 1em">
-            <h3>Ajouter un paragraphe au panier</h3>
-        </div>
-
-        <form role="form" id="addParagraphFormId" name="addParagraphForm">
-            <div class="row margin-top-left-1">
-                <div class="btn-toolbar">
-
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label>Nom du site *</label>
-                        <div class="btn-group">
-
-                            <button class="btn btn-default" id="siteId">Nom du site</button>
-                            <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li data-ng-repeat="site in clientSites">
-                                    <a data-ng-click="fetchSubSites(site)" value="{{site.id}}">{{site.MLNM}}</a>
-                                </li>
-                            </ul>
-                        </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label>Nom du sous-site</label>
-                        <div class="btn-group">
-                            <button class="btn btn-default" id="subSiteId">Nom du sous-site</button>
-                            <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li data-ng-repeat="subSite in fetchedSubSiteList">
-                                    <a data-ng-click="subSiteSelected(subSite)" value="{{subSite.id}}">{{subSite.MLNM}}</a>
-                                </li>
-                            </ul>
-                        </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-2">
-                        <div class="form-group">
-                                <label>Commentaire de la section</label>
-                                <textarea class="form-control" rows="2" ng-model="paragraphDescription" placeholder="Description section" id="paraDescriptionId"></textarea>
-                        </div>
-                    </div>
-
-                    <button class=" btn btn-default" ng-click="cancelParagraph()" style="margin-top: 2em">annuler</button>
-                    <button ng-click="registerParagraph()" class="btn btn-default" style="margin-top: 2em">enregister</button>
-
+    <modal-dialog show='divAddParagraph' width='100%' height='50%' style='background-color: #604A7B; color: #604A7B'>
+        <div class="row col-lg-offset-2 col-lg-5">
+            <div class="row">
+                <div class="btn-group" style=" margin-bottom: 1em; margin-left: 1em">
+                    <h4 style="color: #ffffff; font-family: segoeuib">Ajouter un paragraphe au panier</h4>
                 </div>
             </div>
-        </form>
-    </div>
+
+            <div class="row margin-top-left-1">
+                    <div class="btn-toolbar">
+
+                        <div class="row">
+                           <label style="color: #ffffff; font-family: segoeuib">Nom du site *</label>
+                        </div>
+                        <div class="row">
+                            <div class="btn-group">
+                                <button class="btn btn-default" id="siteId">Nom du site</button>
+                                <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li data-ng-repeat="site in clientSites">
+                                        <a data-ng-click="fetchSubSites(site)" value="{{site.id}}">{{site.MLNM}}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                          <label style="color: #ffffff; font-family: segoeuib">Nom du sous-site</label>
+                        </div>
+                        <div class="row">
+                            <div class="btn-group">
+                                <button class="btn btn-default" id="subSiteId">Nom du sous-site</button>
+                                <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li data-ng-repeat="subSite in fetchedSubSiteList">
+                                        <a data-ng-click="subSiteSelected(subSite)" value="{{subSite.id}}">{{subSite.MLNM}}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <label style="color: #ffffff; font-family: segoeuib">Commentaire de la section</label>
+                        </div>
+                        <div class="row col-lg-8" style="margin-left: -2em">
+                                    <textarea class="form-control" rows="2" ng-model="paragraphDescription" placeholder="Description section" id="paraDescriptionId"></textarea>
+                        </div>
+
+
+                    </div>
+           </div>
+        </div>
+        <div class="col-lg-1 col-lg-offset-1">
+            <div class="btn-group" style="margin-left: 1em; margin-top: 1em">
+                <a ng-click="registerParagraph(paragraphDescription)"><img width="50%" src="/img/cs_forward_white.png" class="img-responsive"></a>
+            </div>
+        </div>
+    </modal-dialog>
+
     <div ng-show="catalogueIncludeDiv">
         <p ng-include="quoteCatalogueBodyURL"></p>
     </div>

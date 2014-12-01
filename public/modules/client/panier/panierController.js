@@ -78,6 +78,7 @@ angular.module('QuotationApp.masters').controller('ClientPanierController',['$ro
         $("#siteId").text('Nom du site');
         $("#subSiteId").text('Nom du sous-site');
         $("#paraDescriptionId").val('');
+        $scope.paragraphDescription='';
         $scope.divAddParagraph=true;
         $scope.divPanier=false;
     }
@@ -109,11 +110,12 @@ angular.module('QuotationApp.masters').controller('ClientPanierController',['$ro
         $scope.selectedSubSite=subSite.id;
     }
 
-    $scope.registerParagraph=function(){
+    $scope.registerParagraph=function(paragraphDescription){
+        $scope.paragraphDescription=paragraphDescription;
         console.log('description is : '+$scope.paragraphDescription);
         console.log('current Quote id is : '+$scope.currentQuote.Quotation_id);
         if($scope.selectedSubSite==''){
-
+            console.log('desc here is : '+$scope.paragraphDescription);
             $http.get('crud/client/Quote/saveQuoteParagraph/' + $scope.currentQuote.Quotation_id + '/' + $scope.selectedSite + '/null/' + $scope.paragraphDescription).success(function (data) {
                 console.log('quote paragraph saved');
                 console.dir(data);

@@ -27,6 +27,12 @@ angular.module('QuotationApp').config(['$stateProvider', '$urlRouterProvider',
       }).state('clientDetails', {
           url: '/clientDetails',
           templateUrl: 'modules/client/views/client.html'
+      }).state('admin',{
+          url:'/admin',
+          templateUrl:'modules/admin/views/admin.html'
+      }).state('addUser',{
+          url:'/addUser',
+          templateUrl:'modules/admin/addUser/views/addUser.html'
       }).state('index',{
           url: '/index',
           templateUrl: 'views/index.html'

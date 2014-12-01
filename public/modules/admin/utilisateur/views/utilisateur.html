@@ -1,0 +1,98 @@
+<div data-ng-controller="adminUtilisateurController">
+
+    <modal-dialog show='modalShown' width='90%' height='60%'>
+        <div class="row" style=" margin-left: 0em; margin-right: 0em">
+            <div class="col-lg-2">
+                <a href="#" onClick="$('#userRolesId').hide(); $('#userDataId').show();$(this).css('background', 'white');$('#userRolesId').css('background','');$(this).css('color', 'black');" style="color: #000000;background-color: #ffffff;">
+                    <b style="font-size: large; font-family: segoeuib">User data</b>
+                </a>
+            </div>
+            <div class="col-lg-2">
+                <a href="#" onClick="$('#userDataId').hide(); $('#userRolesId').show();$(this).css('background', 'white');$(this).css('color', 'black');$('#userDataId').css('background','');$('#userDataId').css('color','white')">
+                    <b style="font-size: large; font-family: segoeuib">User roles</b>
+                </a>
+            </div>
+        </div>
+
+        <div style="margin-top: 2em; margin-left: 1em" id="userDataId">
+            <div class="row" style="margin-left: 0em">
+                <div class="col-lg-3">
+                    <div class="row">
+                        <label style="color: #ffffff; font-family: segoeuib">Nom</label>
+                    </div>
+                    <div class="row">
+                        <label style="color: #ffffff; font-family: segoeuib">{{selectedUser.employee.internal_name}}</label>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="row">
+                        <label style="color: #ffffff; font-family: segoeuib">AD login</label>
+                    </div>
+                    <div class="row">
+                        <label style="color: #ffffff; font-family: segoeuib">{{selectedUser.employee.EMAL}}</label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-lg-offset-6">
+                    <button class=" btn btn-default" ng-click="cancelUserDetails()">annuler</button>
+                    <button style="background-color: #EC2653; color: #ffffff" ng-click="registerEmployee(selectedUser)" data-ui-sref="admin" class="btn btn-default">enregister</button>
+                </div>
+            </div>
+        </div>
+
+        <div style="margin-top: 2em;margin-left: 1em; display: none" id="userRolesId">
+            <div class="row" style="margin-left: 0em">
+                <div class="col-lg-3">
+                    <div class="row">
+                        <label style="color: #ffffff; font-family: segoeuib">Roles disponibles</label>
+                    </div>
+                    <div class="row">
+                        <select size="4" style="width: 95%">
+                            <option ng-click="addRoleToUserRolesList(role)" ng-repeat="role in allRolesList">{{role.Name}}
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="row">
+                        <label style="color: #ffffff; font-family: segoeuib">Roles assignees</label>
+                    </div>
+                    <div class="row">
+                        <select size="4" style="width: 95%">
+                            <option ng-click="removeRoleToUserRolesList(userRole)" ng-repeat="userRole in userRolesList">{{userRole.Name}}
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-lg-offset-6">
+                    <button class=" btn btn-default" ng-click="cancelUserDetails()">annuler</button>
+                    <button style="background-color: #EC2653; color: #ffffff" ng-click="registerUserRoles()" data-ui-sref="admin" class="btn btn-default">enregister</button>
+                </div>
+            </div>
+        </div>
+
+    </modal-dialog>
+
+    <div class="table-responsive table-border" style="margin-top: 1em">
+
+        <table class="table table-hover">
+            <thead style="background-color: #080808; color: #f8f8f8;">
+            <tr>
+                <th>Nom</th>
+                <th>Login AD</th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-ng-repeat="selectedUser in selectedUsersList track by $index" ng-click="showSelectedUserDetails(selectedUser)">
+                <td>{{selectedUser.employee.internal_name}}</td>
+                <td>{{selectedUser.employee.EMAL}}</td>
+                <td><a ng-click="showEmployeeDetails(employee)"><img width="25%" src="/img/delete_b30.png" class="img-responsive"></a></td>
+                <td><a ng-click="showEmployeeDetails(employee)"><img width="20%" src="/img/rounded_search_b_30.png" class="img-responsive"></a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
