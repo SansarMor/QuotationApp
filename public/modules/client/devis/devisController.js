@@ -70,7 +70,7 @@ angular.module('QuotationApp.masters').controller('clientDevisController',['$roo
     });
 
     $scope.addDevis=function(){
-        $scope.devisListDiv=false;
+        /*$scope.devisListDiv=false;*/
         $scope.addDevisDiv=true;
         console.log('inside add Devis function');
 

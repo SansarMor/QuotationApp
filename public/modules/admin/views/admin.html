@@ -2,9 +2,15 @@
 
     <div class="row" style="margin-left: 1em; margin-top: 1em;margin-bottom: 1em">
         ADMIN
-        <!--<a data-ui-sref="addUser" ng-click="addUser(employee)" style="margin-left: 1em"><img width="30%" src="/img/addrole_b_30.png" class="img-responsive" ></a>-->
         <button data-ui-sref="addUser" type="button" class="btn btn-default glyphicon glyphicon-plus-sign" style="margin-left: 1em" data-ng-click="addUser()"> Ajouter user</button>
+
+        <!--<div class="btn-group" style="margin-top: 1em; margin-bottom: 1em; margin-left: 1em">
+            <a ng-click="addUser()"><img width="40%" src="/img/adduser_b_30.png" class="img-responsive"></a>
+        </div>-->
+
+
         <button type="button" class="btn btn-default glyphicon glyphicon-plus-sign" style="margin-left: 1em" data-ng-click="addRole()"> Ajouter function</button>
+        <button type="button" class="btn btn-default glyphicon glyphicon-plus-sign" style="margin-left: 1em" data-ng-click="addRoleFlux()"> Ajouter role flux</button>
     </div>
 
     <modal-dialog show='modalShown' width='90%' height='60%'>
@@ -45,6 +51,84 @@
             </div>
         </div>
     </modal-dialog>
+
+
+
+    <modal-dialog show='roleFluxModalShown' width='90%' height='60%'>
+        <div class="row" style=" margin-left: 0em; margin-right: 0em">
+            <div class="col-lg-2">
+                <b style="color: #6D4955;background-color: #ffffff; font-size: large; font-family: segoeuib">Role Flow</b>
+            </div>
+        </div>
+
+        <div style="margin-top: 2em; margin-left: 1em">
+            <div class="row" style="margin-left: 0em">
+                <div class="col-lg-5">
+                    <div class="row">
+                        <label style="color: #ffffff; font-family: segoeuib">Role *</label>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-10" style="margin-left: -1em">
+                            <div class="btn-group">
+                                <button class="btn btn-default" id="selectedRoleId">Select Role</button>
+                                <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li  data-ng-repeat="role in allRolesList">
+                                        <a data-ng-click="roleSelected(role)">{{role.Name}}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <label style="color: #ffffff; font-family: segoeuib">Type Agence *</label>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-10" style="margin-left: -1em">
+                            <div class="btn-group">
+                                <button class="btn btn-default" id="selectedTypeAgenceId">Select Type Agence</button>
+                                <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a data-ng-click="typeAgenceSelected('INSTALL')">Install</a></li>
+                                    <li><a data-ng-click="typeAgenceSelected('SERVICE')">Service</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <label style="color: #ffffff; font-family: segoeuib">Flux *</label>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-10" style="margin-left: -1em">
+                            <div class="btn-group">
+                                <button class="btn btn-default" id="selectedFluxId">Select Flux</button>
+                                <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li  data-ng-repeat="fluxData in allFluxData">
+                                        <a data-ng-click="fluxDataSelected(fluxData)">{{fluxData.DL01}}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3 col-lg-offset-5">
+                    <button class=" btn btn-default" ng-click="cancelRoleFlux()">annuler</button>
+                    <button style="background-color: #EC2653; color: #ffffff" ng-click="registerRoleFlux()" data-ui-sref="admin" class="btn btn-default">enregister</button>
+                </div>
+            </div>
+        </div>
+    </modal-dialog>
+
 
     <div class="row" style="background-color: transparent; margin-left: 0em; margin-right: 0em">
         <div class="span12" style="margin-left: 1em">

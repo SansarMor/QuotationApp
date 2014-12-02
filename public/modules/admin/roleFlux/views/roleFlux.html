@@ -1,0 +1,24 @@
+<div data-ng-controller="adminRoleFluxController">
+
+    <div class="table-responsive table-border" style="margin-top: 1em">
+
+        <table class="table table-hover">
+            <thead style="background-color: #080808; color: #f8f8f8;">
+            <tr>
+                <th>Role</th>
+                <th>Type agence</th>
+                <th>Flux</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-ng-repeat="roleFlow in roleFlowList">
+                <td>{{roleFlow.roleName}}</td>
+                <td>{{roleFlow.roleFlow.Agency_Type}}</td>
+                <td>{{roleFlow.fluxName}}</td>
+                <td><a ng-click="showEmployeeDetails(employee)"><img width="15%" src="/img/delete_b30.png" class="img-responsive"></a></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

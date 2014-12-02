@@ -80,7 +80,7 @@ angular.module('QuotationApp.masters').controller('ClientPanierController',['$ro
         $("#paraDescriptionId").val('');
         $scope.paragraphDescription='';
         $scope.divAddParagraph=true;
-        $scope.divPanier=false;
+        /*$scope.divPanier=false;*/
     }
 
     $scope.cancelParagraph=function(){
